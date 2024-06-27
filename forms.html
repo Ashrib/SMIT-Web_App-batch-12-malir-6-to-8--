@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>Forms</title>
+</head>
+<body>
+    <form >
+        Username
+        <input type="text" name="username" size="10" 
+        maxlength="3" required
+        /><br>
+        password
+        <input type="password" name="password" placeholder="create 6 digit code"/>
+        email
+        <input type="email" name="email" placeholder="abc@xyz.com" />
+<input type="number">
+<br>
+        Write your comment
+        <textarea name="comment" cols="10" rows="5">
+
+
+        </textarea>
+
+
+
+        <br>
+        Gender:
+        <input type="radio" name="gender" value="male" checked >Male 
+        <input type="radio" name="gender" value="female">Female 
+
+
+
+
+        <p>
+            Please select your favorite music service(s):
+            <br />
+            <input type="checkbox" name="service"
+            value="itunes" checked /> iTunes
+            <input type="checkbox" name="service"
+            value="lastfm" /> Last.fm
+            <input type="checkbox" name="service"
+            value="spotify" /> Spotify
+           
+            </p>
+
+
+            <p>
+                <select name="devices" multiple>
+                    <option value="pc" >PC</option>
+                    <option value="laptop">laptop</option>
+                    <option value="ipod">iPod</option>
+                    <option value="radio">Radio</option>
+                    <option value="computer">Computer</option>
+                    <option value="mobile" selected>mobile</option>
+
+                </select>
+            </p>
+            <p>
+                Upload image:
+                <input type="file" name="user_image" >
+
+            </p>
+            <br>
+            Gender:
+            <input id="male_radio" type="radio" name="gender" value="male" checked >
+            <label for="male_radio">Male</label> 
+            <input id="female_radio" type="radio" name="gender" value="female">
+            <label for="female_radio">Female</label>  
+            
+            <input type="image"  src="./assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg"
+            height="10" width="30"
+            >
+
+            <input type="submit" value="Submit">
+<!-- <button></button> -->
+
+<input type="date" name="" id="">
+<input type="color" name="" id="">
+
+
+
+
+
+    </form>
+
+
+    <!-- {
+        username: abcd,
+        password: 12213,
+        gender: male,
+        service: [itunes, lastfm],
+        devices: [pc,laptop],
+    } -->
+
+
+
+
+</body>
+</html>
