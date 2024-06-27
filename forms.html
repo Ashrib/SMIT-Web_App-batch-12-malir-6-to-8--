@@ -1,88 +1,199 @@
 <!DOCTYPE html>
-<html >
-<head>
+<html>
+  <head>
     <title>Forms</title>
-</head>
-<body>
-    <form >
+`
+
+    <style>
+      .p1 {
+        /* background-color: red; */
+      }
+      .blue_text {
+        color: blue;
+        font-weight: bold;
+      }
+      .parent {
+        border: 1px solid black;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main_container">
+      <!-- header starts -->
+      <marquee id="top" direction="right">Some text</marquee>
+      <form>
         Username
-        <input type="text" name="username" size="10" 
-        maxlength="3" required
-        /><br>
+        <input type="text" name="username" size="10" maxlength="3" required />
+        <br />
         password
-        <input type="password" name="password" placeholder="create 6 digit code"/>
+        <input
+          type="password"
+          name="password"
+          placeholder="create 6 digit code"
+        />
         email
         <input type="email" name="email" placeholder="abc@xyz.com" />
-<input type="number">
-<br>
+        <input type="number" />
+        <br />
         Write your comment
-        <textarea name="comment" cols="10" rows="5">
+        <textarea name="comment" cols="10" rows="5"> </textarea>
 
-
-        </textarea>
-
-
-
-        <br>
+        <br />
         Gender:
-        <input type="radio" name="gender" value="male" checked >Male 
-        <input type="radio" name="gender" value="female">Female 
+        <input type="radio" name="gender" value="male" checked />Male
+        <input type="radio" name="gender" value="female" />Female
 
-
-
+        <!-- Students Table  -->
 
         <p>
-            Please select your favorite music service(s):
-            <br />
-            <input type="checkbox" name="service"
-            value="itunes" checked /> iTunes
-            <input type="checkbox" name="service"
-            value="lastfm" /> Last.fm
-            <input type="checkbox" name="service"
-            value="spotify" /> Spotify
-           
-            </p>
+          Please select your favorite music service(s):
+          <br />
+          <input type="checkbox" name="service" value="itunes" checked /> iTunes
+          <input type="checkbox" name="service" value="lastfm" /> Last.fm
+          <input type="checkbox" name="service" value="spotify" /> Spotify
+        </p>
 
+        <p>
+          <select name="devices" multiple>
+            <option value="pc">PC</option>
+            <option value="laptop">laptop</option>
+            <option value="ipod">iPod</option>
+            <option value="radio">Radio</option>
+            <option value="computer">Computer</option>
+            <option value="mobile" selected>mobile</option>
+          </select>
+        </p>
+        <p>
+          Upload image:
+          <input type="file" name="user_image" />
+        </p>
+        <br />
+        Gender:
+        <input
+          id="male_radio"
+          type="radio"
+          name="gender"
+          value="male"
+          checked
+        />
+        <label for="male_radio">Male</label>
+        <input id="female_radio" type="radio" name="gender" value="female" />
+        <label for="female_radio">Female</label>
 
-            <p>
-                <select name="devices" multiple>
-                    <option value="pc" >PC</option>
-                    <option value="laptop">laptop</option>
-                    <option value="ipod">iPod</option>
-                    <option value="radio">Radio</option>
-                    <option value="computer">Computer</option>
-                    <option value="mobile" selected>mobile</option>
+        <input
+          type="image"
+          src="./assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg"
+          height="10"
+          width="30"
+        />
 
-                </select>
-            </p>
-            <p>
-                Upload image:
-                <input type="file" name="user_image" >
+        <input type="submit" value="Submit" />
+        <!-- <button></button> -->
 
-            </p>
-            <br>
-            Gender:
-            <input id="male_radio" type="radio" name="gender" value="male" checked >
-            <label for="male_radio">Male</label> 
-            <input id="female_radio" type="radio" name="gender" value="female">
-            <label for="female_radio">Female</label>  
-            
-            <input type="image"  src="./assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg"
-            height="10" width="30"
-            >
+        <input type="date" name="" id="" />
+        <input type="color" name="" id="" />
 
-            <input type="submit" value="Submit">
-<!-- <button></button> -->
+        <fieldset>
+          <legend>Contact Details</legend>
 
-<input type="date" name="" id="">
-<input type="color" name="" id="">
+          <label
+            >Email:<br />
+            <input type="text" name="email" /> </label
+          ><br />
+          <label
+            >Mobile:<br />
+            <input type="text" name="mobile" /></label
+          ><br />
+          <label
+            >Telephone:<br />
+            <input type="text" name="telephone"
+          /></label>
+        </fieldset>
+      </form>
+      <p class="blue_text">some text</p>
 
+      <div class="parent">
+        <div>
+          <p id="para" class="p1 blue_text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+          <p class="p1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+        </div>
 
+        <div>
+          <p id="para" class="p1 blue_text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+          <p class="p1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+        </div>
+        <div>
+          <p id="para" class="p1 blue_text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+          <p class="p1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+            consequuntur, dicta, dolores molestias optio quod perspiciatis
+            doloribus laudantium dolor quasi nemo mollitia laboriosam fuga esse
+            voluptate distinctio corporis! Earum, id.
+          </p>
+        </div>
+      </div>
 
+      <p>
+        <span class="blue_text"> Lorem ipsum</span> dolor sit amet consectetur
+        adipisicing elit. Ut expedita mollitia id error corrupti atque qui earum
+        dolor numquam eveniet consectetur aspernatur rerum fuga, minus unde
+        molestias explicabo tempore ducimus!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur est
+        fugiat iste optio cumque culpa officia quidem at nihil molestias esse
+        nam nesciunt, repellat illum necessitatibus voluptatum quasi
+        <span class="blue_text">corporis unde?</span>
+      </p>
+      <span>Some text&lt;</span>
+      <a href="#top">go to top</a>
+    </div>
 
-
-    </form>
-
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/BsDoLVMnmZs?si=Uc8A__RP_XMMQeTh"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14488.148836066905!2d67.02120436500628!3d24.794179377364195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d0da8778751%3A0xf466063d4c2a9f35!2sClifton%20Beach%2C%20Karachi!5e0!3m2!1sen!2s!4v1719500655476!5m2!1sen!2s"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
 
     <!-- {
         username: abcd,
@@ -91,9 +202,5 @@
         service: [itunes, lastfm],
         devices: [pc,laptop],
     } -->
-
-
-
-
-</body>
+  </body>
 </html>
