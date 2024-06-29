@@ -1,0 +1,50 @@
+*{
+    font-style: italic;
+ }
+ h1{
+     color: red;
+ }
+ p.note{
+     color: red;
+     
+ }
+ #top{
+     
+     font-size: 3em;
+ }
+
+ /* li > a{
+     color: darkgreen;
+ } */
+
+ li a{
+     color: darkgreen;
+ }
+ h4 + p{
+     color: rgb(0, 162, 255);
+ }
+ h5 ~ p{
+     
+     color: rgb(132, 0, 255);
+ }
+
+
+ a{
+     color: darkgreen !important;
+ }
+ a{
+     color: rgb(252, 0, 0);
+     font-style: italic;
+ }
+ a{
+     color: red !important;
+ }
+ div{
+     background-color: burlywood;
+     padding: 3%;
+ }
+ div > p{
+     background-color: antiquewhite;
+     padding: inherit;
+ }
+ 
