@@ -1,0 +1,67 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+div{
+    background-color: aquamarine;
+    padding: 3%;
+}
+p{
+    background-color: rgb(252, 241, 82);
+    background-color: red;
+    /* color: #B1AE06; */
+    /* color: rgb(202, 42, 138); */
+    /* background-color: rgba(252, 241, 82, 0.776); */
+    background-color: hwb(0 49% 3% / 0.156);
+
+    /* opacity: 0.15; */
+}
+
+p {
+    padding: 5px;
+    margin: 0px;}
+    p.zero {
+    background-color: rgb(238,62,128);}
+    p.one {
+    background-color: rgb(244,90,139);}
+    p.two {
+    background-color: rgb(243,106,152);}
+    p.three {
+    background-color: rgb(244,123,166);}
+    p.four {
+    background-color: rgb(245,140,178);}
+    p.five {
+    background-color: rgb(246,159,192);}
+    p.six {
+    background-color: rgb(245,176,204);}
+    p.seven {
+    background-color: rgb(0,187,136);}
+    p.eight {
+    background-color: rgb(140,202,242);}
+    p.nine {
+    background-color: rgb(114,193,240);}
+    p.ten {
+        background-color: rgb(84,182,237);}
+        p.eleven {
+        background-color: rgb(48,170,233);}
+        p.twelve {
+        background-color: rgb(0,160,230);}
+        p.thirteen {
+        background-color: rgb(0,149,226);}
+        p.fourteen {
+        background-color: rgb(0,136,221);}
+
+
+        p{
+            font-size: 100%;
+        }
+
+        .div1{
+            height: 200px;
+            width: 50%;
+            background-color: rgb(0, 140, 255);
+        }
+        .div2{
+            background-color: aqua;
+            height: 50%;
+            width: 200px;
+        }
