@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Ga+Maamli&display=swap');
+*{
+    font-family: "Ga Maamli", sans-serif;
+}
+.p1{
+    font-weight: 900;
+    /* font-size: 32px; */
+    font-size: 1em;
+    font-style: italic;
+    text-transform: capitalize;
+    line-height: 3em;
+}
+h1{
+    font-size: 64px;
+}
+span{
+    font-size: 0.5em;
+}
+h2{
+    text-transform: uppercase;
+    text-decoration: line-through;
+    letter-spacing: 15px;
+}
+h3{
+    text-transform: lowercase;
+    text-decoration: underline;
+    word-spacing: 10px;
+
+}
+h6{
+    text-align: center;
+}
+.p2{
+    text-align: justify;
+}
+div{
+    display: flex;
+    align-items: center;
+}
+h4{
+    background-image: url("../../HTML/assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg");
+    text-indent: -9999px;
+}
+h5{
+    text-shadow: -12px -12px 1px red;
+}
+span::first-line{
+    padding: 15px;
+    font-size: 3em;
+}
+h3:hover{
+    background-color: blueviolet;
+}
+a:hover{
+    /* background-color: brown; */
+}
+a:link{
+    color: red;
+}
+a:visited{
+    color: black;
+
+}
+a:active{
+    color: yellow;
+
+}
+input:focus{
+    padding: 3%;
+    outline-color: red;
+}
+button:focus{
+    background-color: red;
+}

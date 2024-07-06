@@ -59,6 +59,7 @@ p {
             height: 200px;
             width: 50%;
             background-color: rgb(0, 140, 255);
+            padding: auto;
         }
         .div2{
             background-color: aqua;
