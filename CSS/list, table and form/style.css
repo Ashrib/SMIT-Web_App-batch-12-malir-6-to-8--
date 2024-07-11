@@ -1,0 +1,23 @@
+ul{
+    list-style-type: none;
+    /* list-style-image: url('../../HTML/assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg'); */
+}
+ol{
+    /* list-style-type: lower-alpha;
+    list-style-position: inside; */
+
+    list-style: inside lower-alpha;
+}
+table.one{
+    empty-cells: hide;
+    border-spacing: 10px;
+
+}
+td{
+    padding: 15px;
+    cursor: pointer;
+}
+table.two{
+    border-collapse: collapse;
+    
+}
