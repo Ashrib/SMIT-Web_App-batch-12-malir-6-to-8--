@@ -1,0 +1,41 @@
+.main{
+    width: 70%;
+    border: 1px solid black;
+    height: 150px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    /* align-items: baseline; */
+
+
+}
+
+.items{
+    border: 1px solid black;
+    padding: 5px;
+    width: 100px;
+    height: 40px;
+    /* flex-grow: 1; */
+}
+
+.one{
+    font-size: 2em;
+    /* flex-shrink: 0; */
+    /* flex-grow: 5; */
+}
+
+.three{
+    font-size: 1.5em;
+    /* flex-shrink: 5; */
+}
+.two{
+    order: -2;
+}
+
+.four{
+    flex-basis: 200px;
+    font-size: 0.5em;
+    order: -3;
+}

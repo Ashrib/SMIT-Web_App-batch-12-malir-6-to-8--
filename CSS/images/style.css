@@ -1,0 +1,13 @@
+
+
+body{
+    /* background-image: url('../../../../Downloads/download.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: contain;
+    
+
+    background: rgb(244,227,192);
+    background: linear-gradient(180deg, rgba(244,227,192,1) 13%, rgba(221,17,17,1) 92%);
+}
