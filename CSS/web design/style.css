@@ -1,0 +1,102 @@
+body{
+
+    padding: 0;
+    margin:  0;
+}
+.main{
+    height: 100vh;
+    width: 100vw;
+    background-color: bisque;
+    overflow: scroll;
+
+}
+nav{
+    height: 50px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+}
+
+.left-content{
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 183, 88);
+    width: 40%;
+    /* flex-grow: 2; */
+}
+
+.right-content{
+    display: flex;
+    /* background-color: rgb(8, 207, 221); */
+    /* flex-grow: 1; */
+
+}
+#menu-icon{
+    display: none;
+}
+.div-btn{
+    display: flex;
+    justify-content: center;
+}
+.card{
+    border: 1px solid black;
+    width: 200px;
+    height: 300px;
+    flex-shrink: 0;
+}
+.card-img{
+    height: 100px;
+    width: 100%;
+    background-size: cover;
+    background-image: url('../../HTML/assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg');
+}
+.cards-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 10px;
+    /* width: 100%; */
+}
+
+@media screen and (max-width:768px){
+
+    #menu-icon{
+        display: block;
+    }
+    ul{
+        display: none;
+    }
+}
+    
+@media screen and (min-width:768px){
+
+    .left-content{
+        /* background-color: aqua; */
+    }
+}
+@media screen and (max-width:425px){
+    .right-content{
+        /* display: flex; */
+        flex-direction: column;
+    }
+    
+}
+    
+    /* @media screen and (min-width:768px) and (max-width:800px){
+
+        .left-content{
+            background-color: rgb(255, 30, 0);
+        }
+
+
+
+
+} */
+
+
