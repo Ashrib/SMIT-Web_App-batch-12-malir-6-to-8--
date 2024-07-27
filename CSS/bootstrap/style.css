@@ -1,0 +1,18 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid{
+    border: 2px solid red;
+    height: 400px;
+}
+.card{
+    height: 200px;
+    width: 300px;
+}
+
+.col-grid{
+    border: 1px solid black;
+
+}
