@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid{
+    /* border: 2px solid red; */
+    height: 400px;
+}
+
+.col-grid{
+    border: 1px solid black ;
+
+}
+.img{
+    background-position: center;
+    height: 100px;
+    width: 100%;
+    background-image: url('../../HTML/assets/yeshi-kangrang-wTD1-_u8x1g-unsplash.jpg');
+}
