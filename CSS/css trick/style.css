@@ -1,0 +1,68 @@
+h1 {
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+background-clip: text;
+    color: transparent;
+}
+
+
+h2{
+    position: relative;
+    padding: 15px;
+    width: max-content;
+}
+
+
+h2:hover::after{
+    content: '';
+    height: 10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 15px;
+    background: rgb(131, 58, 180);
+    background: linear-gradient(
+      90deg,
+      rgba(131, 58, 180, 1) 0%,
+      rgba(253, 29, 29, 1) 50%,
+      rgba(252, 176, 69, 1) 100%
+    );
+
+
+}
+
+ul{
+    list-style: none;
+}
+
+
+ul li::before{
+    content: '🔥';
+  }
+
+  ul li:hover::after{
+    content: '😍';
+  }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
