@@ -34,7 +34,8 @@ var marks = 80;
 
 if (marks > 79) {
   console.log("A");
-} else if (marks >= 70) {
+} 
+  else if (marks >= 70) {
   console.log("B");
 } else if (marks >= 70) {
   console.log("B");
@@ -47,8 +48,9 @@ if (marks > 79) {
 var weight = 70;
 var age = 18;
 
-if (weight > 60 && age > 17) {  // &&
+if (weight > 60 && age > 17 ) {  // &&
   console.log("Come to our tryout!");
+
 } else {
   console.log("Come to our cookout!");
 }
@@ -68,20 +70,36 @@ var gender = "male";
 if(age >= 18){
     
     if(gender === "male"){
-        alert("web and app");
-        
+        console.log("web and app");
     }
     else{
-        alert("graphic");
+        console.log("graphic");
     }
 
 }else{
-    if(age <=17 && age >=12){
+    if( age >=12){
 
-        alert("techno kids");
+        console.log("techno kids");
+    }
+    else if(age >=8){
+
     }
     else{
-        alert("sorry");
+        console.log("sorry");
 
     }
 }
+
+
+
+if((weight === 70 && age >17 ) && gender === "male")
+{
+  alert("ok")
+}
+
+
+
+
+
+
+
