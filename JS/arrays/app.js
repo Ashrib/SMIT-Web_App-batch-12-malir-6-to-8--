@@ -43,24 +43,31 @@ console.log(mixedValues)
 
 
 mixedValues.splice(2,1); // deleting
-console.log(mixedValues)
+console.log( "after splice: (remove)", mixedValues)
 
 
 mixedValues.splice(2,0, "hey"); // adding without deleting
-console.log(mixedValues)
+console.log( "after splice: (adding)", mixedValues)
 
 
-mixedValues.splice(0,0, 600); // adding without deleting
-console.log(mixedValues)
+mixedValues.splice(2,3, 55,44,200); // adding and deleting
+console.log( "after splice: (add and remove both)", mixedValues)
 
 
+// slice for copy
+var copyArray = mixedValues.slice(0);
+console.log("copy array1:", copyArray);
 
-var copyArry = mixedValues.slice(2,4)
-console.log( "copy array: ",copyArry )
+var copyArray2 = mixedValues.slice(2, 5);
+                            //   (2, 5-1)
+console.log("copy array2:", copyArray2);
+
+// [1 , 2, 3, 4]
+// -4  -3  -2 -1
+var copyArray3 = mixedValues.slice(-3);
+console.log("copy array3:", copyArray3);
 
 
-var text = "Hello this is Asharib";
-var var2 = text.slice(2,4)
-console.log("var2: ",var2)
-
-
+var copyArray4 = mixedValues.slice(-5,-2);
+                            //   (index, (-2)-1)
+console.log("copy array 4:", copyArray4);
