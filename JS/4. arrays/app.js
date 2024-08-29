@@ -37,7 +37,6 @@ console.log(mixedValues)
 mixedValues.shift() // remove from the beginning
 console.log(mixedValues)
 
-
 mixedValues.unshift(50, 100) // add one or more from the beginning
 console.log(mixedValues)
 
