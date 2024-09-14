@@ -16,3 +16,20 @@ var userName = prompt("enter your name");
 document.getElementById("para1").innerText = userName;
 
 
+var getSpan = document.getElementById("span1");
+console.log(getSpan.innerText)
+console.log(getSpan.innerHTML)
+getSpan.innerText = "this is span"
+
+getSpan.className = "sp2"
+
+var getHeadings = document.getElementsByTagName("body");
+console.log(getHeadings[0]);
+
+
+
+
+
+
+
+
