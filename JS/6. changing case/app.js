@@ -34,30 +34,37 @@ console.log(string)
 // // var monthToShow = month.slice(0,1).toUpperCase() + month.slice(1,3);
 // // document.write(monthToShow);
 
-var text = "some      text";
+// var text = "some      text";
 
-for(var i=0; i<text.length; i++){
+// for(var i=0; i<text.length; i++){
 
-console.log("index:",i, text.slice(i, i+2));
+// console.log("index:",i, text.slice(i, i+2));
 
-    if(text.slice(i, i+2) === "  "){
-        console.log("double space not allow!")
+//     if(text.slice(i, i+2) === "  "){
+//         console.log("double space not allow!")
+//     }
+// }
+var count = 0
+var text2 = "the New Yorker magazine doesn't allow the phrase World War II. text The New Yorker magazine doesn't allow the phrase  text";
+for (var i = 0; i < text2.length; i++) {
+// console.log(text2.slice(i, i+12))
+    if( text2.slice(i, i+12) === "World War II"){
+        text2 = text2.slice(0, i) + "second world war" +text2.slice(i+12) 
+       count++;
     }
-}
+    if(count === 5){
+        break
+    }
+    
+    }
+    console.log(text2)
 
-// var text2 = "the New Yorker magazine doesn't allow the phrase World War II. text The New Yorker magazine doesn't allow the phrase World War II. text";
-// // for (var i = 0; i < text2.length; i++) {
-// //   if (text2.slice(i, i + 12) === "World War II") {
-// //     text2 = text2.slice(0, i) + "Second world war" + text2.slice(i + 12);
-// //   }
-// // }
 
 // var findIndex = text2.indexOf("allow");
-
 // if (findIndex !== -1) {
 //   text2 = text2.slice(0, findIndex) + "not allow" + text2.slice(findIndex + 5);
 // }
-// console.log(text2);
+// console.log(findIndex);
 
 
 // console.log(text2.lastIndexOf("the"));
