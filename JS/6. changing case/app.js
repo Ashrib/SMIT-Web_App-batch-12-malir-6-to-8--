@@ -45,20 +45,26 @@ console.log(string)
 //     }
 // }
 var count = 0
-var text2 = "the New Yorker magazine doesn't allow the phrase World War II. text The New Yorker magazine doesn't allow the phrase  text";
-for (var i = 0; i < text2.length; i++) {
+var text2 = "the New Yorker magazine doesn't allow the phrase World War II. text The New Yorker magazine doesn't allow the phrase World War II text";
+// for (var i = 0; i < text2.length; i++) {
 // console.log(text2.slice(i, i+12))
-    if( text2.slice(i, i+12) === "World War II"){
-        text2 = text2.slice(0, i) + "second world war" +text2.slice(i+12) 
-       count++;
-    }
-    if(count === 5){
-        break
-    }
+    // if( text2.slice(i, i+12) === "World War II"){
+    //     text2 = text2.slice(0, i) + "second world war" +text2.slice(i+12) 
+    //    count++;
+    // }
+    // if(count === 5){
+    //     break
+    // }
     
-    }
+    // }
     console.log(text2)
+    
+    text2 = text2.replace("World War II", "second world war");
 
+
+    text2 = text2.replace(/World War II/g , "second world war");
+
+    console.log(text2)
 
 // var findIndex = text2.indexOf("allow");
 // if (findIndex !== -1) {
@@ -96,7 +102,8 @@ for (var i = 0; i < text2.length; i++) {
 // //   }
 // // }
 
-// console.log(text2.charAt(9));
+console.log(text2.charAt(9));
+
 // console.log(text2[9]);
 
 
