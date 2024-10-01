@@ -100,6 +100,49 @@ setInterval(()=>{
     secSp.innerText = time.getSeconds()
 }, 1000) 
 
+function createRandom(){
+    return Math.round(Math.random() *100 );
+}
+function sumNumbers(a,b){
+
+    var numRandom = createRandom();
+    return (a+b) *numRandom;
+}
+// var total = sumNumbers(5,10) * 100
+
+
+console.log(sumNumbers(5,10))
+
+
+function getArray(arr){
+    var num = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if(num < arr[i]){
+            num = arr[i];
+        }
+    }
+    console.log(arr)
+    return num;
+}
+// console.log(getArray([0,2,50,5,6,8,10,16]))
+
+var array1 = [ 3, 'yes', true, [0,1,34] ]
+console.log(array1[3][2])
+
+function getData(){
+  return [10,15,2,6,7]
+}
+function getLogin(username, pass){
+    if(username && pass){
+        return getData() ;
+    }
+    else{
+        console.log('error')
+    }
+
+}
+
+console.log(getLogin("abc123", "12345"))
 
 
 

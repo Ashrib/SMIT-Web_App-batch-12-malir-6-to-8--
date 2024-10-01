@@ -44,4 +44,11 @@ console.log("time: ",currentTime.getTime());
 // console.log(time2)
 
 
+var futureTime = new Date("June 30, 2050");
+
+var currentMilli = currentTime.getTime();
+var futureMilli = futureTime.getTime();
+var diff = futureMilli - currentMilli;
+
+console.log(Math.floor(diff/(1000 * 60 * 60 *24)))
 
