@@ -124,7 +124,7 @@ function getArray(arr){
     console.log(arr)
     return num;
 }
-// console.log(getArray([0,2,50,5,6,8,10,16]))
+console.log(getArray([0,2,50,5,6,8,10,16]))
 
 var array1 = [ 3, 'yes', true, [0,1,34] ]
 console.log(array1[3][2])
@@ -146,5 +146,25 @@ console.log(getLogin("abc123", "12345"))
 
 
 
+// var sumNums  = 10;
+function toAdd(){
+    var sumNums = 15; // local variable
+    return sumNums;
+}
+sumNums =  toAdd();
+console.log(sumNums) //new variable
+
+
+
+var array = [];
+function addToArray(arrElm){
+    array.push(arrElm)
+    return array;
+}
+
+var userInp = prompt("");
+
+  console.log(addToArray(userInp))
+  console.log(addToArray(354))
 
 

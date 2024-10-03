@@ -4,10 +4,10 @@
 // console.log(randomNum)
 
 
-// var int = parseInt("1.999")
-// var float = parseFloat("6.999")
-// console.log("int:",int, typeof int)
-// console.log("float:",float,typeof float );
+var int = parseInt("1.999")
+var float = parseFloat("6.999")
+console.log("int:",int, typeof int)
+console.log("float:",float,typeof float );
 
 
 // // var userMarks = prompt("marks");
@@ -15,12 +15,12 @@
 // // console.log(per)
 
 
-// console.log( Number("10.56") + 6)
+console.log( Number("10.56") )
 
-// var a = 150;
-// a = a.toString();
-
-// console.log( typeof a)
+var a = 150;
+a = a.toString();
+console.log(typeof(a))
+// console.log( Math.floor(Math.random()* 1000) + 1000)
 
 
 
@@ -28,6 +28,6 @@
 
 
 
-var total = 15.6946;
+var total = 15.6476;
 console.log(total.toFixed(2));
 

@@ -46,9 +46,14 @@ console.log("time: ",currentTime.getTime());
 
 var futureTime = new Date("June 30, 2050");
 
-var currentMilli = currentTime.getTime();
-var futureMilli = futureTime.getTime();
-var diff = futureMilli - currentMilli;
+// var currentMilli = currentTime.getTime();
+// var futureMilli = futureTime.getTime();
+// var diff = futureMilli - currentMilli;
 
-console.log(Math.floor(diff/(1000 * 60 * 60 *24)))
+// console.log(Math.floor(diff/(1000 * 60 * 60 *24)))
 
+console.log(currentTime.getFullYear())
+
+currentTime.setFullYear(2050);
+
+console.log(currentTime.getFullYear())
