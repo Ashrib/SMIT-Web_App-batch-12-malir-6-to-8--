@@ -79,6 +79,7 @@
 //  else if( number > 70){
 //     total = toSum(number , 150)
 //  }
+
 //   console.log(total)
 
 
@@ -114,7 +115,7 @@ function sumNumbers(a,b){
 console.log(sumNumbers(5,10))
 
 
-function getArray(arr){
+function getArray(arr=[]){
     var num = 0;
     for (let i = 0; i < arr.length; i++) {
         if(num < arr[i]){
@@ -124,7 +125,10 @@ function getArray(arr){
     console.log(arr)
     return num;
 }
-console.log(getArray([0,2,50,5,6,8,10,16]))
+console.log(getArray([5,8,9,22]))
+
+
+
 
 var array1 = [ 3, 'yes', true, [0,1,34] ]
 console.log(array1[3][2])
@@ -162,10 +166,10 @@ function addToArray(arrElm){
     return array;
 }
 
-var userInp = prompt("");
+// var userInp = prompt("");
 
-  console.log(addToArray(userInp))
-  console.log(addToArray(354))
+//   console.log(addToArray(userInp))
+//   console.log(addToArray(354))
 
 
 
@@ -183,3 +187,5 @@ function factorial(num){
 
 }
 console.log(factorial(4));
+
+
