@@ -146,3 +146,52 @@ while (i < user3.length) {
     
 
 
+function Product(price, b, c, d){
+  this.price = price;
+  this.color = b;
+  this.des = c;
+  this.rating = d;
+}
+var p1 = new Product(100, 'black', 'any', 'good');
+var p2 = new Product(500, 'white', 'any', 'good');
+
+console.log('p1:',p1.color);
+console.log('p2:',p2);
+
+
+var i = 0;
+var p = [];
+while(i<5){
+    p.push( new Product(i, 'white', 'any', 'good'));
+    
+  i++;
+}
+console.log(p);
+
+
+// function toAdd(){
+//   var inpElm = document.getElementById('userInput').value;
+//   console.log(inpElm)
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
