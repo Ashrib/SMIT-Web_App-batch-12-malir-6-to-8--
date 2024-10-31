@@ -229,7 +229,7 @@ var data = [
   "bs": "target end-to-end models"
   }
   }
-  ]
+];
 
 
 var modalParentElm = document.getElementsByClassName('modal-parent')[0];
