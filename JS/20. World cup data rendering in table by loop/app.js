@@ -509,7 +509,6 @@ function openModal(){
 
 var mainDiv = document.getElementsByClassName("main")[0];
 
-
 function clickedGroup(gName){
   openModal();
   console.log(gName)
@@ -545,15 +544,13 @@ tr.innerHTML = `<td>${thisData.standings[key].team.name}</td>
 <td>${thisData.standings[key]?.won}</td>
 `
 tbl.appendChild(tr);
-
 }
-
 
 }
 
 for(var i in data[0].groups){
   mainDiv.innerHTML += `<div class='groupDiv' onClick="clickedGroup('${data[0].groups[i].name}')">${data[0].groups[i].name}</div>`
+};
 
 
-}
 

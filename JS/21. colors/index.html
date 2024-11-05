@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>while</title>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        position: relative;
+      }
+      .body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: 80%;
+        flex-wrap: wrap;
+      }
+      .box,.match{
+        height: 30px;
+        width: 30px;
+        border: 1px solid black;
+      }
+      .main{
+        height: 100vh;
+        width:  100vw;
+      }
+      
+    </style>
+  </head>
+  <body>
+
+    <div class="main">
+      <div class="head">
+        Match this color
+        <div class="match"></div>
+        <div class="score"></div>
+      </div>
+      <div class="body"></div>
+    </div>
+    <!-- <button onclick="toMatch(event)"></button> -->
+
+    <script src="./app.js"></script>
+  </body>
+</html>

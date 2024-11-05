@@ -1,30 +1,24 @@
-function toggleTheme(){
-    var bodyElm = document.getElementsByTagName("body")[0];
-    var bodyClass = bodyElm.getAttribute("class");
-    console.log(bodyElm.getAttribute("class"))
+function toggleTheme() {
+  var bodyElm = document.getElementsByTagName("body")[0];
+  var bodyClass = bodyElm.getAttribute("class");
+  console.log(bodyElm.getAttribute("class"));
 
-    if(bodyClass === "light"){
-        bodyElm.setAttribute("class", "dark")
-    }
-    else{
-        bodyElm.setAttribute("class", "light")
-    }
+  if (bodyClass === "light") {
+    bodyElm.setAttribute("class", "dark");
+  } else {
+    bodyElm.setAttribute("class", "light");
+  }
 }
 
-
-
-
-
-var mainDiv = document.getElementById("main")
-console.log(mainDiv)
+var mainDiv = document.getElementById("main");
+console.log(mainDiv);
 
 // var userName = prompt("enter your name");
 // heading.innerText = userName;
 
 // console.log(heading)
 
-
-var users = [ 'ali', 'hassan', 'arbaz'];
+var users = ["ali", "hassan", "arbaz"];
 
 // for (let i = 0; i < users.length; i++) {
 //     var heading = document.createElement("h1");
@@ -34,23 +28,75 @@ var users = [ 'ali', 'hassan', 'arbaz'];
 
 //         mainDiv.appendChild(heading);
 
-    
 // }
 
-
-
-
 var tableElm = document.createElement("table");
-tableElm.setAttribute("border", "1")
+tableElm.setAttribute("border", "1");
 for (let i = 0; i < 5; i++) {
-    var tableRow1 = document.createElement("tr");
-    var tbCol = document.createElement("td");
-    var tbCol2 = document.createElement("td");
-    tbCol.innerText = "col 1";
-    tbCol2.innerText = "col 2";
-    tableRow1.appendChild(tbCol)
-    tableRow1.appendChild(tbCol2)
-    tableElm.appendChild(tableRow1)
+  var tableRow1 = document.createElement("tr");
+  var tbCol = document.createElement("td");
+  var tbCol2 = document.createElement("td");
+  tbCol.innerText = "col 1";
+  tbCol2.innerText = "col 2";
+  tableRow1.appendChild(tbCol);
+  tableRow1.appendChild(tbCol2);
+  tableElm.appendChild(tableRow1);
 }
 
-mainDiv.appendChild(tableElm)
+mainDiv.appendChild(tableElm);
+
+console.log(document.getElementsByTagName("div")[0].nodeType);
+
+console.log(document.childNodes[1].childNodes[1].childNodes);
+var ul = document.getElementsByTagName("ul")[0].childNodes;
+
+var eNode = 0,
+  tNode = 0;
+for (var i = 0; i < ul.length; i++) {
+  if (ul[i].nodeType === 1) {
+    eNode++;
+  } else {
+    tNode++;
+  }
+}
+console.log(eNode);
+console.log(tNode);
+
+var ul1 = document.getElementsByTagName("ul")[0]
+console.log(ul1.parentNode);
+console.log(ul1.firstChild);
+console.log(ul1.lastChild);
+console.log(ul1.nextSibling);
+console.log(ul1.previousSibling);
+
+
+console.log(mainDiv);
+var toCount = 0;
+for(var i=0; i<mainDiv.childNodes.length; i++){
+  if( mainDiv.childNodes[i].nodeName.toLowerCase() ==="h2" ){
+    toCount++;
+  }
+
+  // console.log(mainDiv.childNodes[i].nodeName.toLowerCase())
+}
+console.log(toCount)
+
+
+
+console.log(mainDiv.hasAttribute('class'))
+
+
+console.log(ul1.hasAttribute('class'))
+console.log(ul1.getAttribute('class'))
+ul1.setAttribute('id', 'ulID')
+console.log(ul1.getAttribute('id'))
+
+
+
+console.log(ul1.attributes[1].nodeValue) // for simple string id
+
+
+
+
+
+
