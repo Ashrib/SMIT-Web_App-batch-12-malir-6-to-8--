@@ -93,9 +93,59 @@ console.log(ul1.getAttribute('id'))
 
 
 
-console.log(ul1.attributes[1].nodeValue) // for simple string id
+console.log(ul1.attributes[0].nodeValue) // for simple string id
 
 
+var li1 = document.getElementById('li1');
+
+
+var liText = document.createTextNode('list item 1');
+var i = document.createElement('i');
+
+i.appendChild(liText);
+li1.appendChild(i)
+
+ul1.insertBefore(i, li1);
+
+console.log(liText)
+
+
+function addList(){
+  console.log(ul1.childNodes)
+  var count = 0;
+  
+  for(var i=0; i < ul1.childNodes.length; i++){
+    if(ul1.childNodes[i].nodeName.toLowerCase() === 'li'){
+      count++;
+    }
+  }
+  var li = document.createElement('li');
+  li.innerText = `list ${count + 1}`
+  ul1.appendChild(li)
+  console.log(count)
+}
+
+
+function removeList(){
+  if(ul1.lastChild.nodeName.toLowerCase() === 'li'){
+    ul1.removeChild(ul1.lastChild);
+    return;
+  }
+  for(var i=ul1.childNodes.length-1; i >= 0; i--){  // reverse loop to get last li element
+    if(ul1.childNodes[i].nodeName.toLowerCase() === 'li'){
+      ul1.removeChild(ul1.childNodes[i]);
+      break;
+    }
+  }
+
+
+
+
+
+
+
+
+}
 
 
 

@@ -17,7 +17,8 @@
         color: white;
       }
     </style>
-  </head><body class="light">
+  </head>
+  <body class="light">
     <div id="main">
       <h1 id="name"></h1>
       <h1 id="name"></h1>
@@ -29,8 +30,18 @@
     </div>
 
     <button onClick="toggleTheme()">theme change</button>
-    <div>hello</div><ul class="ul">listing<li>list</li><li>list</li><li>list</li></ul>
+    <div>hello</div>
 
+
+    <ul class="ul">
+      listing
+      <li id="li1">list 1</li>
+      <li >list 2</li>
+      <li>list 3</li>
+
+    </ul>
+    <button onClick="addList()">Add item</button>
+    <button onClick="removeList()">Remove item</button>
 
     <script src="./app.js"></script>
   </body>
