@@ -109,11 +109,9 @@ ul1.insertBefore(i, li1);
 
 console.log(liText)
 
-
 function addList(){
   console.log(ul1.childNodes)
   var count = 0;
-  
   for(var i=0; i < ul1.childNodes.length; i++){
     if(ul1.childNodes[i].nodeName.toLowerCase() === 'li'){
       count++;
@@ -124,7 +122,6 @@ function addList(){
   ul1.appendChild(li)
   console.log(count)
 }
-
 
 function removeList(){
   if(ul1.lastChild.nodeName.toLowerCase() === 'li'){
@@ -138,14 +135,9 @@ function removeList(){
     }
   }
 
-
-
-
-
-
-
-
 }
+
+
 
 
 

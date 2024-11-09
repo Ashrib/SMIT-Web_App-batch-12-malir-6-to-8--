@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functions</title>
+
+    <style>
+      #main {
+        height: 700px;
+        width: 500px;
+        margin: 20px 0;
+        }
+        img {
+          height: 100%;
+          width: 100%;
+        }
+        body{
+          padding: 50px 0;
+        }
+
+        .name>span {
+          display: none;
+        }
+        .error{
+          color: red;
+          font-size: 0.5em;
+        }
+    </style>
+  </head>
+  <body class="light">
+    <div id="main">
+      <img src="./02.jpg" alt=""   onMouseover="change(event, 'over')"  
+      onMouseout="change(event, 'out')">
+    </div>
+
+
+    <div class="name">
+      <input type="text" placeholder="Enter your name"
+    onFocus="focusInp(event)" onBlur="blurInp(event,'name')"
+    >
+    <span class="name-error error"></span>
+    </div>
+
+
+    
+    <div class="pass">
+      <input type="password" placeholder="Enter your password"
+    onFocus="focusInp(event)" onBlur="blurInp(event,'pass')"
+    ><span onClick="passVisiblility(event)">show</span>
+    <span class="pass-error error"></span>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
