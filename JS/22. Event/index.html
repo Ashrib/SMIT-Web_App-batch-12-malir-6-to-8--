@@ -7,8 +7,8 @@
 
     <style>
       #main {
-        height: 700px;
-        width: 500px;
+        height: 300px;
+        width: 600px;
         margin: 20px 0;
         }
         img {
@@ -26,18 +26,28 @@
           color: red;
           font-size: 0.5em;
         }
+
+        .bold-txt{
+          font-size: 2em;
+          font-weight: 900;
+        }
+        .redText{
+          color: red;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        
     </style>
   </head>
   <body class="light">
     <div id="main">
-      <img src="./02.jpg" alt=""   onMouseover="change(event, 'over')"  
+      <img src="./02.jpg" alt=""   onMouseover="change(event, 'over')"
       onMouseout="change(event, 'out')">
     </div>
 
 
     <div class="name">
       <input type="text" placeholder="Enter your name"
-    onFocus="focusInp(event)" onBlur="blurInp(event,'name')"
+    onFocus="focusInp(event)" onBlur="validateInp(event,'name')"
     >
     <span class="name-error error"></span>
     </div>
@@ -46,11 +56,28 @@
     
     <div class="pass">
       <input type="password" placeholder="Enter your password"
-    onFocus="focusInp(event)" onBlur="blurInp(event,'pass')"
-    ><span onClick="passVisiblility(event)">show</span>
+    onFocus="focusInp(event)" onBlur="validateInp(event,'pass')"
+    ><span style="cursor: pointer;" onClick="passVisiblility(event)">show</span>
     <span class="pass-error error"></span>
     </div>
 
+    <div class="email">
+      <input type="text" placeholder="Enter your email"
+    onFocus="focusInp(event)" onInput="validateInp(event,'email')"
+    >
+    <span class="email-error error"></span>
+    </div>
+
+
+    <span class="redText" >some text</span>
+    <span class="bold-txt" onClick="addStyle(event)">add color class</span>
+    
+    <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quo  .... <a href="javascript:void(0)" onClick="showMore()">see more</a></p>
+
+
+
+
+    
     <script src="./app.js"></script>
   </body>
 </html>
