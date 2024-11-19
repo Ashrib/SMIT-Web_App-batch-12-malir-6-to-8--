@@ -35,26 +35,56 @@
         color: red;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
-
     </style>
   </head>
   <body class="light">
     <div id="main">
       <form action="" onSubmit="submitData(event)">
         <div>
-          <input id="username" type="text" placeholder="enter username"
-          onInput="inputValid(event)"
+          <input
+            id="username"
+            type="text"
+            placeholder="enter username"
+            onInput="inputValid(event)"
           />
           <span class="error"></span>
         </div>
         <div>
-          <input id="password" type="text" placeholder="enter password"/>
+          <input id="password" type="text" placeholder="enter password" />
           <span class="error"></span>
         </div>
 
-        <input type="submit" class="btn"/>
+        <input type="submit" class="btn" />
       </form>
     </div>
+
+    <form onSubmit="checkForSelection(event)">
+      <select id="states">
+        <option value="" selected>SELECT A STATE</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option></select
+      >&nbsp;&nbsp;
+      <input type="submit" value="Submit Form" />
+    </form>
+
+    <form onSubmit="validateRadios(event);">
+      <input type="radio" name="r1" value="cat" /> Cat<br />
+      <input type="radio" name="r1" value="bat" /> Bat<br />
+      <input type="radio" name="r1" value="hat" /> Hat<br />
+      <input type="submit" value="Submit Form" />
+    </form>
+
+
+<br>
+<br>
+<br>
+<br>
+    <form action="" onSubmit="validateEmail(event)">
+      <input type="text" id="email">
+      <input type="submit">
+    </form>
 
     <script src="./app.js"></script>
   </body>
