@@ -69,7 +69,7 @@ var usersData = [
 
 function checkForSelection(e) {
   e.preventDefault();
-  if (document.getElementById("states").selectedIndex === 0) {
+  if (document.getElementById("states").selectedIndex === 0) { // selectedIndex 0 is the option that should not be selected
     alert("Please select a state.");
     return;
   }
@@ -80,12 +80,12 @@ function validateRadios(e) {
   e.preventDefault();
 
   console.log(radios)
-  var radios = document.getElementsByName("r1");
+  var radios = document.getElementsByName("r1"); // array of radio btns
   console.log(radios)
   
   for (var i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
-      console.log(radios[i].value)
+      console.log(radios[i].value) // selected radio tn value
       return ;
     }
   }
@@ -96,9 +96,9 @@ function validateRadios(e) {
 
 function validateEmail(e) {
   e.preventDefault();
-  var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\. \-]+\.[a-zA-z0-9]{2,4}$/;
+  var regex = /^[\w\-\.\+]+\@[a-zA-Z0-9\. \-]+\.[a-zA-z0-9]{2,4}$/; //regex
   var emailInp = document.getElementById("email").value;
-  if(!emailInp.match(regex) ){
+  if(!emailInp.match(regex) ){ // to match regex
     alert("invalid");
     return;
   }
