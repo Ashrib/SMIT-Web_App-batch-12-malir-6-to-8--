@@ -72,7 +72,6 @@ function editItem(e) {
   e.target.innerText = "save";
 };
 
-
 var obj = {
   a:'sdfsdf',
   b:'sdgdfhrt',
@@ -80,3 +79,4 @@ var obj = {
 obj = {...obj}
 
 console.log(obj);
+
