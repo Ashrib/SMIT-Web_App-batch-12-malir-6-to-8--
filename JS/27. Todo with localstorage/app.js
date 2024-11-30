@@ -50,11 +50,11 @@ function editItem(e ,id){
 
 function updatedItem(id , inptValue){
   console.log(id,inptValue)
-  // for (let i = 0; i < todoData.length; i++) {
-  //   if(todoData[i].id === id){
-  //     todoData[i] = {...todoData[i], listText:  inptValue}
-  //     saveData(todoData)
-  //     return
-  //   }
-  // }
+  for (let i = 0; i < todoData.length; i++) {
+    if(todoData[i].id === id){
+      todoData[i] = {...todoData[i], listText:  inptValue}
+      saveData(todoData)
+      return
+    }
+  }
 }
