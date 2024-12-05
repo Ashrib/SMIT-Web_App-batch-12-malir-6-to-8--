@@ -23,12 +23,10 @@ function submitForm(e){
     window.location.replace('../dashboard/dashboard.html')
   }
 
-
-
-
-
-
-
-
   
 }
+
+
+
+
+
