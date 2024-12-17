@@ -7,6 +7,7 @@ var sum = ()  => {
 sum();
 
 
+
 // var data = [
 //   Anas Talha rizwan bilal akmal bilal waleed muhib aaliyan zohaib faiq asadullah junaid zeeshan bhai shoaib sarim rizwan soomro huzaifa ilyas siraj umer muzamil owais hasnain kamran ahmed raza faizan amaan umais unaid muhammad muzamil usman shaoud usman ahmed ayan mubashir ibharim husban gulam adnan nadeem azeem zain M.anas talha shahraz shahbaz amjad abdullah umaim arshman ali huzaifa shahrukh imtiaz shahzad arbaz usama
 // ]
@@ -119,7 +120,11 @@ let greet = (p_name = 'guest') => { // default parameter
 }
 
 greet('asharib')
-greet()
+greet();
+
+
+
+
 
 
 
@@ -138,6 +143,8 @@ let person = ['abc', 19, 20]
 let [, , x2] = person;
 // console.log(x1);
 console.log(x2);
+
+
 
 
 
