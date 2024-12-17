@@ -26,8 +26,6 @@ let userFetch = async () => {
     console.log(data);
   } catch (error) {
     console.error(error);
-    console.error(error);
-    console.error(error);
   }
 };
 userFetch();
