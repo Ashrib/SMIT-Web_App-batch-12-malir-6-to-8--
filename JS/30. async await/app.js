@@ -57,7 +57,6 @@ userFetch();
 
 
 
-
 function* countTo(max) {
   for (let i = 1; i <= max; i++) {
     yield i;
@@ -86,8 +85,6 @@ console.log(nums.next().value); // 2
 
 
 
-
-
 function* asyncTasks() {
   const user = yield fetchUserData();
   const posts = yield fetchUserPosts(user.id);
@@ -101,7 +98,6 @@ taskRunner.next().value.then(user => {
     console.log(posts);
   });
 });
-
 
 
 

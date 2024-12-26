@@ -22,7 +22,8 @@ console.log(filterData)
 let users = [
   {id: 1, name: "John"},
   {id: 2, name: "Pete"},
-  {id: 3, name: "Mary"}
+  {id: 3, name: "Mary"},
+  {id: 1, name: "John"},
 ];
 // filter specific user
 let filterUser = users.filter((user)=> user.id<3 && user.name==='John');
@@ -48,4 +49,42 @@ console.log( [1,2,4].map((elm) => elm*elm).filter(elm => elm<=16));
 
 
 
+let a1 = [1,2,'a','b'];
+// let arrayLike = {
+//   0: "something",
+//   1: "else",
+//   [Symbol.isConcatSpreadable]: true,
+//   length: 2
+// };
 
+// console.log(a1.concat(arrayLike))
+
+
+console.log(users.findIndex((item)=> item.name === 'John'))
+console.log(users.findLastIndex((item)=> item.name === 'John'))
+
+
+
+let nums = [23,6,89,1,0,5];
+let chs = ['a','c','d','b'];
+console.log(nums.sort())
+console.log(chs.sort())
+
+
+console.log(nums.sort((a,b)=> a-b))
+console.log(nums.sort((a,b)=> b-a))
+
+console.log(Array.isArray([1,2,4]))
+console.log(Array.isArray({a:'2'}))
+
+
+
+function unique(arr) {
+  return arr.filter((item,i,array)=> array.indexOf(item) === i)
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+console.log( unique(strings) ); // Hare, Krishna, :-O
