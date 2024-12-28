@@ -45,7 +45,7 @@ let nestedArr = [ ['a','b', ['d','a',[2,4]]], ['c','d'],'e','f'];
 console.log( nestedArr.flat(Infinity).join('') );
 
 
-console.log( [1,2,4].map((elm) => elm*elm).filter(elm => elm<=16));
+console.log( [1,2,4]?.map((elm) => elm*elm)?.filter(elm => elm<=16));
 
 
 
@@ -88,3 +88,9 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
 ];
 
 console.log( unique(strings) ); // Hare, Krishna, :-O
+
+
+
+
+
+
