@@ -34,7 +34,6 @@ let renderData = ()=>{
   }
 renderData();
 
-
 let getFilter = (value)=>{
   console.log(value)
   if(!value.length<1) {
