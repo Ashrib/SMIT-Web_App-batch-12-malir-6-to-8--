@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
 import {
   getFirestore,
   collection,
@@ -32,7 +31,6 @@ const firebaseConfig = {
   appId: "1:208816035355:web:f981b70408e763e8f68abe",
   measurementId: "G-8CBYY2GXQ3",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -41,9 +39,8 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-
 let signUp = async()=>{
-  await createUserWithEmailAndPassword(auth, 'xyz@gmail.com', '123456')
+  await createUserWithEmailAndPassword(auth, 'aab@gmail.com', '123456')
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
@@ -56,9 +53,9 @@ let signUp = async()=>{
     console.log(errorCode, errorMessage)
     // ..
   });
-
 }
 // signUp()
+
 
 let signIn = async()=>{
   await  signInWithEmailAndPassword(auth, 'xyz@gmail.com', '123456')
@@ -76,7 +73,6 @@ let signIn = async()=>{
 
 }
 // signIn()
-
 // TO CHECK USER IS LOG-IN OR NOT
 let checkUser = async()=>{
 try {
@@ -89,7 +85,6 @@ try {
       // ...
     } else {
       // User is signed out
-      
       console.log('signed out')
       // ...
     }
