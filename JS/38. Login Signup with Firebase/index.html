@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .form{
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  
+
+  <div class="main">
+    <div class="form">
+      <!-- <form onSubmit="signUpWithEmailPass(event)"> -->
+        <input id="name" type="text" placeholder="enter Name">
+        <input id="phone" type="phone" placeholder="enter phone">
+        <input id="email" type="text" placeholder="enter email">
+        <input id="password" type="password" placeholder="enter password">
+        <button id="signUp-btn">
+          sign up
+        </button>      
+        <!-- </form> -->
+    </div>
+    <h2>OR</h2>
+    <button id="google-signUp">
+      sign up with Google
+    </button>
+
+
+    <button id="logout-btn">
+      logout
+    </button>
+  </div>
+
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
