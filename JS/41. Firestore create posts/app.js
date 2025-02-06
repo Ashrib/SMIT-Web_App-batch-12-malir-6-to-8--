@@ -57,7 +57,7 @@ getRequest().then(()=>{
     try{
       let user = await getDoc(doc(db,'users', 'o4xvzUFpX9gfM9JT8o4eREFs4PB3'))
       console.log(user)
-    }catch(e){
+     }catch(e){
       console.error(e)
     }
   })
