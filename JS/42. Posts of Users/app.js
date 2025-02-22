@@ -80,5 +80,4 @@ document.querySelector('#login-btn').addEventListener('click',()=>{
 signIn(emailValue,passwordValue);
 
 
-
 })

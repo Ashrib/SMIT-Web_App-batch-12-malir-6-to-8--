@@ -6,9 +6,11 @@ import {
   where,
   updateDoc,
   doc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { db, auth } from "./firebaseConfig.js";
+import { db, auth , storage} from "./firebaseConfig.js";
+import {  ref, uploadBytes ,getDownloadURL  } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
 
 let myPostDiv = document.querySelector("#myPosts");
 let allPostDiv = document.querySelector("#allPosts");
@@ -19,6 +21,48 @@ if (!loggedInUser) {
   window.location.replace("./index.html");
 }
 console.log(loggedInUser);
+let user = {};
+(async()=>{
+  try {
+    const q = query(collection(db, "users"), where("uid", "==", loggedInUser));
+    const querySnapshot = await getDocs(q);
+    user = querySnapshot.docs[0].data();
+    console.log(user)
+  } catch (error) {
+    console.error(error)
+  }
+})();
+
+if(user.photoURL){
+  document.querySelector('#img').setAttribute('src', user?.photoURL) 
+}
+
+
+
+
+
+// document.querySelector('#upload-btn').addEventListener('click',async()=>{
+//   let file = document.querySelector('#file').files[0]
+//   console.log(file)
+//   try {
+//     const storageRef = ref(storage, `userProfiles/${loggedInUser}`);
+//     // 'file' comes from the Blob or File API
+//     await uploadBytes(storageRef, file).then(async(snapshot) => {
+//       console.log('Uploaded a blob or file!');
+//       await getDownloadURL(storageRef).then((url)=>{
+//         console.log(url)
+
+//       })
+
+//     });
+    
+//   } catch (error) {
+//     console.error(error)
+//   }
+// })
+
+
+
 
 let updatePost = async (post_id) => {
   console.log(post_id);
