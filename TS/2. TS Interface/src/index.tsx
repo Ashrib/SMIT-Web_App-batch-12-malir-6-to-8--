@@ -77,7 +77,7 @@ interface Orders{
     quantity: number,
     status: string,
 }
-
+// enum
 enum OrderStatus{
     order_status0 = 'confirmed',
     order_status1 = 'InProgress ',
