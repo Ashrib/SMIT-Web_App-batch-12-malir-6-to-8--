@@ -7,9 +7,11 @@ total = 3;
 let names : string[] = ['34']
 let numbers : number[] = [3]
 numbers.push(4)
+let nestedArray : number[][] = [[4],[5]]
 
 
-let mixArray : (string | number)[] = [3,'a']
+
+let mixArray : (string | number | boolean)[] = [3,'a']
 console.log(mixArray)
 
 // interfaces
@@ -51,6 +53,64 @@ const p2 : Person = {
 
 
 // functions types
-let sum = (a : number,b:number)=>{
-    console.log(a+b)
+let sum = (a : number, b:number) : number =>{
+    return a + b;
 }
+
+let totalSum : number = sum(5,5);
+
+
+let greet = (a : string) : string =>{
+    return `My name is ${a}` 
+}
+let msg : string = greet('ali');
+console.log(msg);
+
+
+let arr : any[] = ['a',5];
+arr.push(true);
+
+
+interface Orders{
+    id: number,
+    product: string,
+    quantity: number,
+    status: string,
+}
+
+enum OrderStatus{
+    order_status0 = 'confirmed',
+    order_status1 = 'InProgress ',
+    order_status2 = 'Shipped ',
+    order_status3 = 'Delievered',
+}
+
+const orders : Orders[] = [
+    {
+        id: 23432,
+        product: 'cap',
+        quantity: 2,
+        status: OrderStatus.order_status0, 
+    },
+    {
+        id: 546546,
+        product: 'bag',
+        quantity: 2,
+        status: OrderStatus.order_status1, 
+    },
+    {
+        id: 56567,
+        product: 'shoes',
+        quantity: 2,
+        status: OrderStatus.order_status2, 
+    },
+    {
+        id: 56567,
+        product: 'shoes',
+        quantity: 2,
+        status: OrderStatus.order_status3, 
+    },
+]
+console.log(orders)
+
+
