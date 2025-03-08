@@ -14,6 +14,13 @@ let b:string= numSum('a','b')
 console.log(b)
 
 
+function concat <Type>(a:Type , b:Type) : string  {
+    return `${a}  ${b}`;
+}
+
+console.log(concat<number>(9,10));
+concat<string>('abc', 'cd');
+
 
 
 
@@ -52,7 +59,7 @@ const p2 : Product<{}> = {
     price: 8,
     data: {
         a: 6,
-        b: 6,
+        b: 6, 
         c: '6',
     },
 }
@@ -93,3 +100,19 @@ admins.push({
     }
 })
 console.log(admins)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

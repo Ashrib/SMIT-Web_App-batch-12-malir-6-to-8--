@@ -9,6 +9,11 @@ let stringSum = (a, b) => {
 };
 let b = numSum('a', 'b');
 console.log(b);
+function concat(a, b) {
+    return `${a}  ${b}`;
+}
+console.log(concat(9, 10));
+concat('abc', 'cd');
 const user1 = {
     name: 'abc',
     data: 3,
