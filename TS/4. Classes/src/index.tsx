@@ -38,5 +38,66 @@ class Percentage{
 let p1 = new Percentage(450,500);
 let p2 = new Percentage(400,500);
 p1.obtMarks = 500
-p1.cal()
-p1.showDetails()
+p1.cal();
+p1.showDetails();
+
+
+class Order{
+
+    private id: string = 'bihi983';
+    readonly serialNo: string = 'o8798094'
+    name: string;
+
+    constructor(name:string){
+        this.name = name;
+    }
+
+    show(){
+        console.log(this.id)
+    }
+
+}
+
+const order1 = new Order('bike');
+console.log(order1.serialNo)
+// order1.serialNo = '5346'   //can't assign
+order1.name = "dsgdfg"
+
+
+
+class Admin{
+    show(){
+        console.log('admin account')
+    }
+}
+class User{
+    show(){
+        console.log('User account')
+    }
+}
+
+let user1  = new User();
+if(user1 instanceof Admin){
+    console.log('yes')
+}else{
+    console.log('no')
+}
+
+
+type accState = 'admin' | 'user'
+function create(acc: accState){
+    let obj         
+    if(acc === 'admin'){
+    obj = new Admin()
+    }
+    else{
+        obj = new User()
+    }
+    return obj;
+}
+
+let getObj = create('admin');
+if(getObj instanceof Admin){
+
+}
+
