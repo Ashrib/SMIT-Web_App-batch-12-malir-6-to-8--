@@ -1,16 +1,53 @@
 import './App.css';
 import Navbar from './components/Navbar/Navbar.jsx';
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import Img1 from './paanorama-03.jpg'
 import Img2 from './paanorama-02.jpg'
 
 function App() {
   const [imageSrc, setImageSrc] = useState(Img1);
   const [toggle, setToggle] = useState(true);
-  const [users, setUsers] = useState(null);
-
-  const [color, setColor] = useState('dark')
+  const [users, setUsers] = useState(
+    [{
+      name:'abc',
+      age:20
+    },
+    {
+      name:'abc',
+      age:20
+    },
+    {
+      name:'abc',
+      age:20
+    },
+    {
+      name:'abc',
+      age:20
+    }
   
+  ]
+  );
+  const [color, setColor] = useState('dark');
+
+let getUsers= ()=>{
+  // fetch
+
+  
+}
+let getPosts= ()=>{
+  // fetch
+}
+  useEffect(()=>{ 
+    //users api
+    getUsers();
+    //posts api
+    getPosts();
+  }, []);
+
+useEffect(()=>{ //posts
+      console.log('post useEffect')
+}, [color,toggle])
+
   let changeImg = ()=>{
     setToggle(!toggle)
     if(toggle){
@@ -20,11 +57,10 @@ function App() {
     setImageSrc(Img2)
   }
 
-
   return (
       <div className={color}>
       {/* props */}
-        <Navbar  title={'Setting'}  color={'red'}/>
+        <Navbar title={'Setting'}  color={'red'} />
         <img src={imageSrc} alt="" height='100px'
         width='200px' />
       <br />
@@ -35,26 +71,26 @@ function App() {
       <div className="cards-box">
         {
         (users)? 
-        <>
-        <h1>{users.name}</h1>
-        <h1>{users.age}</h1>
-        </>
+          users?.map((user,i) =>
+          <div key={i}>
+          <h1>{user?.name}</h1>
+          <h1>{user?.age}</h1>
+          </div>
+        )
         :
-
-        <h1>no user</h1>
-        }
-      
+         <h1>no user</h1>
+}
       </div>
     
-
     <button onClick={()=>{
       setColor('light')
       console.log(color)
+      setUsers(null)
+      console.log(users)
     }}>
       click to change
     </button>
       </div>
-   
   );
 }
 
