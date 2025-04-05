@@ -12,7 +12,6 @@ let  Navbar = ({title,color})=>{
             {/* <Button/> */}
         </div>
 
-        
     );
 }
 
