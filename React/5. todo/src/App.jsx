@@ -15,8 +15,9 @@ function App() {
   let onDeleteHandler = useCallback( (id)=>{
     let updateItems = todo.filter((item)=> item?.id !== id)
     setTodo([...updateItems])
-  },[])
+  },[todo])
 
+  
   let addHandler = ()=>{
     if(input.length < 1){
       return
