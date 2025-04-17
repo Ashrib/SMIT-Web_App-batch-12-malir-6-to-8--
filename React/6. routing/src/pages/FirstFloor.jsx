@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet,Link } from 'react-router'
-import Navbar from '../component/Navbar'
+import Navbar from '../components/Navbar'
 
 const FirstFloor = () => {
   return (

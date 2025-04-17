@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../component/Navbar'
+import Navbar from '../components/Navbar'
 
 import {useNavigate} from 'react-router'
 

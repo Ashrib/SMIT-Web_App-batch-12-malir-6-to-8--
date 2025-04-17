@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../component/Navbar'
-
+import React, { useContext, useEffect, useState } from 'react'
+import Navbar from '../components/Navbar.jsx'
+import {ThemeContext} from '../context/ThemeContext.jsx'
 import {useNavigate, Outlet, Link} from 'react-router'
 
 const Users = () => {
+
+  const {theme,setTheme} = useContext(ThemeContext)
+  console.log(theme)
+
   let navigate = useNavigate();
   const [users, setUsers] = useState([0,1,2])
   let fetchUsers = async () => {
@@ -23,9 +27,11 @@ const Users = () => {
   
   return (
     <>
+    <button onClick={()=>setTheme('dark')}>change to {theme=='light'? 'dark':'light'}</button>
     <Navbar/>
     <div>All Users </div>
-    <div className='flex flex-col'>
+    <div className={`flex flex-col ${theme == 'dark'? 'bg-black text-amber-50': 'bg-white text-black'}`}  >
+      <Link to={`/users/edit?name=abc`}>search params</Link>
     {
       users.map((user,i)=>(
         <div key={user?.id} className='border-2 flex flex-col justify-center items-center'>
@@ -42,4 +48,6 @@ const Users = () => {
     </>
   )
 }
-export default Users
+export default Users;
+
+

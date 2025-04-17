@@ -8,16 +8,14 @@ import FoodCourt from './pages/FoodCourt.jsx'
 import Shop from './pages/Shop.jsx'
 import Users from './pages/Users.jsx'
 import User from './pages/User.jsx'
-import Navbar from './component/Navbar.jsx'
+import Navbar from './components/Navbar.jsx'
 
 
 function App() {
-
   return (
       <>
 
       {(true)?
-      
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/about' element={<About/>}/>
