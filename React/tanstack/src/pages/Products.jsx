@@ -1,77 +1,55 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
+import  ProductCard  from '../../components/ProductCard'
 
 export const Products = () => {
-const fetchProducts = async()=>{
-    let data = await fetch('https://dummyjson.com/products')
-    return data.json()
+    const queryClient = useQueryClient()
+    const [search, setSearch] = useState(null)
+
+const fetchProducts = async(search)=>{
+    let url = (!search)? 'https://dummyjson.com/products':`https://dummyjson.com/products/category/${search}`
+    let data = await fetch(url)
+    return await data.json()
 }
     // Access the client
-    const queryClient = useQueryClient()
     
     // Queries
-    const query = useQuery(
-        { queryKey: ['products'], queryFn:()=>  fetchProducts()}
+    const { data, isLoading, error,isFetching } = useQuery(
+        { 
+            queryKey: ['products'], 
+            queryFn:()=>  fetchProducts(search),
+            keepPreviousData: true
+
+        }
     )
 
+    // console.log(data)
 
-    // const mutation = useMutation({
-    //     mutationFn: ()=>{},
-    //     onSuccess: () => {
-    //       // Invalidate and refetch
-    //       queryClient.invalidateQueries({ queryKey: ['products'] })
-    //     },
-    //   })
-
-
-    const {data, isError,isLoading,isFetching,error} = query;
-   
-    console.log()
-
-
-
-    if (isLoading) {
-        return( <div>loading....</div>)
-    }
-    
   return (
     <div>
-         <div>
-                {data?.products.map((product)=>{
-
-                    return <button>{product.category}</button>
-                })}
-            </div>
         
-        {
-        (data)?
-
-
-
-    data?.products?.map((product)=>{
-        return (
-
-
-            <div className='container mx-auto'>
-
-           
-            <div className="main">
-            <div className='border-2 mb-3'>
-                <img src={product?.thumbnail} alt=""  className='size-20'/> 
-            <h2>{product?.title}</h2>
-            
-            </div>
-            </div>
-
-            </div>
-
-            
+        <div>
+        { isLoading && (
+            <h2> loading....</h2>
         )
-    })
-    :
-    <>no data</>
+
+        }
+    </div>
+
+        <div>
+        <input className='outline-2'
+        type="text" 
+        onChange={(e)=> setSearch(e.target.value)}
+        />
+        </div>
+        {
+            (data?.products)?
+            <ProductCard products={data?.products}/>
+        :
+        null
+        }
+    </div>
     
-    }</div>
     
   )
 }

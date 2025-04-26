@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { getTodos } from './utils/todos'
 import { Routes,Route } from 'react-router'
 import { Products } from './pages/Products'
 import { useQueryClient } from '@tanstack/react-query'
