@@ -9,7 +9,8 @@ export const Products = () => {
 const fetchProducts = async(search)=>{
     let url = (!search)? 'https://dummyjson.com/products':`https://dummyjson.com/products/category/${search}`
     let data = await fetch(url)
-    return await data.json()
+    return await data.json();
+    
 }
     // Access the client
     
