@@ -5,17 +5,17 @@ import { Link } from 'react-router';
      
      return (
          
-         <section className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <div >
+         <section className="flex flex-wrap text-gray-600 body-font">
+  <div className="container flex flex-wrap px-5 py-24 mx-auto">
+    <div className='flex flex-wrap'>
       {products?.map((product)=>{
 
           const {thumbnail, id, title,description,category} = product;
           
        return (
-      <Link 
-      className="flex flex-wrap -m-4" 
-      to={`/product/${id}`}>
+      <div key={id} className="flex flex-wrap -m-4" >
+        <Link 
+          to={`/product/${id}`}>
        <div key={id} className="p-4 md:w-1/3">
         <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
           <img
@@ -34,7 +34,7 @@ import { Link } from 'react-router';
               {description}
             </p>
             <div className="flex items-center flex-wrap ">
-              <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+              <span className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
                 Learn More
                 <svg
                   className="w-4 h-4 ml-2"
@@ -48,7 +48,7 @@ import { Link } from 'react-router';
                   <path d="M5 12h14" />
                   <path d="M12 5l7 7-7 7" />
                 </svg>
-              </a>
+              </span>
               <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                 <svg
                   className="w-4 h-4 mr-1"
@@ -83,6 +83,7 @@ import { Link } from 'react-router';
         </div>
       </div>
       </Link>
+      </div>
       
     )
       })}

@@ -25,7 +25,7 @@ export const Product = () => {
 
     console.log(data)
 
-    const { thumbnail,id:pId , title,description,category} = data
+    const { thumbnail,id:pId , title,description,category} = data || {}
 
   return (
     <section className="text-gray-600 body-font">
