@@ -1,15 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import  ProductCard  from '../../components/ProductCard'
+import {Pagination} from '@mui/material';
 
 export const Products = () => {
     const queryClient = useQueryClient()
     const [search, setSearch] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [skipProducts, setSkipProducts] = useState(0)
     const [categoryValue, setCategoryValue] = useState('All')
 
+    const PER_PAGE_LIMIT = 10;
+
 const fetchProducts = async(search)=>{
-    let url = (search)? `https://dummyjson.com/products/search?q=${search}`:
-     (categoryValue === 'All')? `https://dummyjson.com/products`:`https://dummyjson.com/products/category/${categoryValue}`
+    let url = (search)? `https://dummyjson.com/products/search?q=${search}&limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`:
+     (categoryValue === 'All')? `https://dummyjson.com/products?limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`:`https://dummyjson.com/products/category/${categoryValue}?limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`
 
     let data = await fetch(url)
     return await data.json();
@@ -26,11 +31,14 @@ const fetchCategories = async()=>{
     // Queries
     const { data, isLoading, error,isFetching } = useQuery(
         { 
-            queryKey: ['products',search,categoryValue], 
+            queryKey: ['products',search,categoryValue,skipProducts], 
             queryFn: ()=> fetchProducts(search),
             keepPreviousData: true
         }
     )
+
+
+console.log("data:",data)
 
 // categories fetch
     const query2 = useQuery({
@@ -40,9 +48,6 @@ const fetchCategories = async()=>{
     })
 
     const { data: categories , isLoading: categoryLoading} = query2
-    console.log(categories)
-    console.log(categoryValue)
-
 
   return (
     <div>
@@ -62,6 +67,7 @@ const fetchCategories = async()=>{
                         onClick={()=> {
                             setCategoryValue("All");
                             setSearch('')
+                            setSkipProducts(0)
                         }}
                         >All</button>
                         {/* listing categories */}
@@ -70,7 +76,8 @@ const fetchCategories = async()=>{
                         <button className={`${(categoryValue === category?.slug) ? 'outline-1 text-red-700' : ''}`}
                         onClick={()=> {
                             setCategoryValue(category?.slug);
-                            setSearch('')
+                            setSearch('');
+                            setSkipProducts(0);
                         }}
                         >{category?.slug}</button>
                     )
@@ -91,8 +98,21 @@ const fetchCategories = async()=>{
         :
         null
         }
+
+        <div>
+        <Pagination
+        page={currentPage}
+         count={data? Math.ceil(data?.total/PER_PAGE_LIMIT) : 1} 
+         color="primary" 
+         onChange={(e,page)=>{
+            setCurrentPage(page)
+            setSkipProducts((page -1) * PER_PAGE_LIMIT)
+         }}
+         showFirstButton
+         showLastButton
+         />
+         
+        </div>
     </div>
-    
-    
   )
 }

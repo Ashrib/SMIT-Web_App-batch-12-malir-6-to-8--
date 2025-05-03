@@ -6,6 +6,7 @@ import { getTodos, postTodos} from '../utils/todos.js'
 const Todos = () => {
 
   const [input, setInput] = useState('')
+
   // Access the client
   const queryClient = useQueryClient()
 
@@ -39,14 +40,14 @@ const Todos = () => {
 ))}
 
 
-
 <button 
 disabled={input.length<1}
 onClick={()=> mutation.mutate(input)}
 > post todo</button>
-
     </div>
   )
 }
+
+
 
 export default Todos
