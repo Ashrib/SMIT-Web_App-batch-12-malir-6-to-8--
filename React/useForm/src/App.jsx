@@ -1,33 +1,51 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const schema = yup.object({ /// yup schema
+    email: yup.string().required().matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,'invaild email'),
+    username: yup.string().required().min(3,'min 3 chars'),
+    password: yup.string().required(),
+  })
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema) // provide schema
+  })
+
+
+  const onSubmit = (data) => console.log(data)
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form onSubmit={handleSubmit(onSubmit)} >
+      <input type="text"  placeholder='username'
+        {...register("username")} 
+      />
+      {errors.username && (<span>{errors.username.message}</span>)}
+      <input type="text"  placeholder='email'
+        {...register("email")}
+        
+        />
+        {errors.email && (<span>{errors.email.message}</span>)}
+      <input type="password"  placeholder='password'
+        {...register("password")}
+        
+        />
+        {errors.password && (<span>{errors.password.message}</span>)}
+      <input type="submit" />
+      </form>
+
+
     </>
   )
 }
