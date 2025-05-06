@@ -8,6 +8,7 @@ export const Products = () => {
     const [search, setSearch] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [skipProducts, setSkipProducts] = useState(0)
+    const [productLimit, setProductLimit] = useState(10)
     const [categoryValue, setCategoryValue] = useState('All')
 
     const PER_PAGE_LIMIT = 10;
@@ -15,6 +16,9 @@ export const Products = () => {
 const fetchProducts = async(search)=>{
     let url = (search)? `https://dummyjson.com/products/search?q=${search}&limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`:
      (categoryValue === 'All')? `https://dummyjson.com/products?limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`:`https://dummyjson.com/products/category/${categoryValue}?limit=${PER_PAGE_LIMIT}&skip=${skipProducts}`
+
+    //  let url = (search)? `https://dummyjson.com/products/search?q=${search}&limit=${productLimit}&skip=${skipProducts}`:
+    //  (categoryValue === 'All')? `https://dummyjson.com/products?limit=${productLimit}&skip=${skipProducts}`:`https://dummyjson.com/products/category/${categoryValue}?limit=${productLimit}&skip=${skipProducts}`
 
     let data = await fetch(url)
     return await data.json();
@@ -27,16 +31,14 @@ const fetchCategories = async()=>{
 }  
 
 // Access the client
-    
     // Queries
     const { data, isLoading, error,isFetching } = useQuery(
         { 
-            queryKey: ['products',search,categoryValue,skipProducts], 
+            queryKey: ['products',search,categoryValue,skipProducts, productLimit], 
             queryFn: ()=> fetchProducts(search),
             keepPreviousData: true
         }
     )
-
 
 console.log("data:",data)
 
@@ -46,6 +48,24 @@ console.log("data:",data)
         queryFn: fetchCategories,
 
     })
+
+
+ /// for on scroll pagination
+    // useEffect(() => {
+    //     const handleScroll = () => {
+            
+    //       if (
+    //         window.innerHeight + document.documentElement.scrollTop ===
+    //         document.documentElement.offsetHeight
+    //       ) {
+    //         setProductLimit(productLimit + 10);
+    //       }
+    //     };
+    
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    //   }, [data,isLoading]);
+
 
     const { data: categories , isLoading: categoryLoading} = query2
 
