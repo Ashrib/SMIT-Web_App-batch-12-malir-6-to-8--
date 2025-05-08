@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
 function App() {
-
   const schema = yup.object({ /// yup schema
     email: yup.string().required().matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,'invaild email'),
     username: yup.string().required().min(3,'min 3 chars'),
@@ -22,7 +21,6 @@ function App() {
 
 
   const onSubmit = (data) => console.log(data)
-
 
 
   return (
