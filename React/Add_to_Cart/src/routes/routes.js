@@ -8,39 +8,31 @@ import Blog from "../pages/Blog.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import { Layout } from "../pages/Layout.jsx";
 
-
-export let router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      Component: Layout,
-     
-    },
-    {
-        path: "/auth",
-        Component: Auth,
-        children:[
-            {
-                index:true,
-                Component: Login
-            },
-            {
-                path:'signup',
-                Component: SignUp,
-            }
-        
-        ]
-       
-      },
+export let router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Layout,
+  },
+  {
+    path: "/auth",
+    Component: Auth,
+    children: [
       {
-        path: "/blog",
-        Component: Blog,
-       
-      },
-      {
-        path: '*',
+        index: true,
         Component: Login,
-      }
-  ]
-
-);
+      },
+      {
+        path: "signup",
+        Component: SignUp,
+      },
+    ],
+  },
+  {
+    path: "/blog",
+    Component: Blog,
+  },
+  {
+    path: "*",
+    Component: Login,
+  },
+]);
