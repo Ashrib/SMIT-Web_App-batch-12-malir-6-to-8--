@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Link } from 'react-router';
+import { useDispatch } from 'react-redux';
+
+import { setUser} from '../redux/user/userSlice.js'
 
 export default function Login() {
     const schema = yup
@@ -23,13 +26,27 @@ export default function Login() {
         resolver: yupResolver(schema)
       })
     
-      const onSubmit = (data) => console.log(data)
+
+      const dispatch = useDispatch()
+
+      const onSubmit = (data) => {
+
+
+        //firebase
+
+        // then
+        dispatch(setUser({
+          email: data.email
+        }))
+
+      }
     
     
   return (
 
 
     <>
+
     <Container maxWidth="sm" 
     sx={{
         padding: 2,
@@ -58,7 +75,6 @@ export default function Login() {
             />
 
             <Button type='submit' variant="contained">Submit</Button>
-            
             
                 <Link to={'signup'}>
             <Button variant='outlined'>

@@ -9,7 +9,9 @@ import Dashboard from "../pages/Dashboard.jsx";
 import { Layout } from "../pages/Layout.jsx";
 
 
-export let router = createBrowserRouter(
+export let loginRouter = createBrowserRouter(
+
+  
   [
     {
       path: "/",
@@ -38,9 +40,14 @@ export let router = createBrowserRouter(
        
       },
       {
+        path: "/dashboard",
+        Component: Dashboard,
+      },
+      {
         path: '*',
-        Component: Login,
+        Component: NotFound,
       }
   ]
+ 
 
 );

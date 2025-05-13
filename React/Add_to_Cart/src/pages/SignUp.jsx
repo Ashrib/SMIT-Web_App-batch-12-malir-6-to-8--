@@ -31,6 +31,7 @@ export default function SignUp() {
   return (
 
     <>
+    
     <Container maxWidth="sm" 
     sx={{
       padding: 2,
