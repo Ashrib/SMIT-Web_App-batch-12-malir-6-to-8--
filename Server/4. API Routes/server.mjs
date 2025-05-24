@@ -6,21 +6,7 @@ import productRoutes from './routes/products.js'
 const app = express();
 const PORT = 4000;
 
-let users = [
-    {
-        username: 'bilal',
-        email:'abc@xyz.com',
-        id:1,
-
-    },
-    {
-        username: 'anas',
-        email:'abc@xyz.com',
-        id:2,
-        
-    }
-]
-
+app.use(express.json())
 app.use('/users',userRoutes)
 app.use('/products',productRoutes)
 
