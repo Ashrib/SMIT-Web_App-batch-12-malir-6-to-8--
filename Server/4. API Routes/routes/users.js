@@ -129,9 +129,5 @@ route.delete('/:id', (req, res) => {
 
 
 
-
-
-
-
 export default route;
 
