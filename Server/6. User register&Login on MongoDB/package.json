@@ -1,0 +1,23 @@
+{
+  "name": "2.-1st-expressjs-server",
+  "version": "1.0.0",
+  "description": "my first express server",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "nodemon server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "mongoose": "^8.15.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
+  }
+}
