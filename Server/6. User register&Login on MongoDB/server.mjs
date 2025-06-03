@@ -3,12 +3,15 @@ import morgan from 'morgan';
 import 'dotenv/config'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.js';
+import usersRoutes from './routes/users.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json())
 app.use('/auth',authRoutes)
+app.use('/users',usersRoutes)
+
 
 
  mongoose.connect(process.env.MONGOBD_URL).then(()=>{
