@@ -87,7 +87,7 @@ route.post('/register', async (req, res) => {
 route.post('/login', async (req, res) => {
     try {
         let { email, password } = req.body;
-        const { error, value } = loginSchema.validate(req.body);
+        let { error, value } = loginSchema.validate(req.body);
         if (error) {
             // console.error('error in validation:', error);
             return res.status(400).json({
@@ -118,7 +118,7 @@ route.post('/login', async (req, res) => {
                 username: findUser.username,
                 email: findUser.email,
                 age: findUser.age,
-            }, process.env.JWT_SECRE); // secret key from .env file
+            }, process.env.JWT_SECRET); // secret key from .env file
         // console.log('token:', token);
 
         res.status(200).json({
@@ -129,7 +129,7 @@ route.post('/login', async (req, res) => {
                 email: findUser.email,
                 age: findUser.age,
             },
-            token: token
+            token: token, 
         });
 
     } catch (error) {
@@ -141,5 +141,27 @@ route.post('/login', async (req, res) => {
     }
 })
 
+route.get('/user', (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).json({
+            error: true,
+            message: 'Token not provided, please login first!'
+        });
+    }
+    const token = req.headers.authorization.split(' ')[1];
+
+    let decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decodedUser) {
+        return res.status(401).json({
+            error: true,
+            message: 'Invalid token!'
+        });
+    }
+    res.status(200).json({
+        error: false,
+        message: 'User data fetched successfully!',
+        data: decodedUser
+    });
+});
 
 export default route;

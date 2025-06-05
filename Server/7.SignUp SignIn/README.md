@@ -1,4 +1,10 @@
 # React + Vite
+Joi for schema 
+cors for cors-origin error
+jwt for web token
+password encrypt for bcrypt
+Cookies for set token in cookies
+axios for API request
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

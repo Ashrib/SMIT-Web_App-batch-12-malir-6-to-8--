@@ -1,8 +1,17 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import {AuthContext} from "../context/AuthContext.jsx";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
-export default function SignIn() {
+export default function SignIn() { 
+  let navigate = useNavigate();
+  let [loading, setLoading] = useState(false);
+  let { user, setUser } = useContext(AuthContext);
   const schema = yup.object({
     /// yup schema
     email: yup
@@ -24,8 +33,23 @@ export default function SignIn() {
     resolver: yupResolver(schema), // provide schema
   });
 
-  const submitButton = (data) => {
-    console.log(data);
+  const submitButton = async(data) => {
+    console.log('form data:', data);
+    try {
+      setLoading(true);
+      let loginUser = await axios.post('http://localhost:4000/auth/login', data).then((response) => {
+        console.log("Login successful:", response?.data?.data);
+        setUser(response?.data?.data)
+        Cookies.set('token', response?.data?.token)
+        navigate("/dashboard");
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error("Error during sign in:", error);
+      // Handle error (e.g., show a notification)
+      setLoading(false);
+    } 
+
   };
 
   return (
@@ -74,11 +98,11 @@ export default function SignIn() {
             {errors.password && <span>{errors.password.message}</span>}
           </div>
 
-          <button
+          <button disabled={loading}
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className={`text-white ${loading ? "bg-red-800" : "bg-blue-700 hover:bg-blue-800"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}
           >
-            Submit
+            {loading ? "Loading..." : "Submit"}
           </button>
         </form>
       </div>

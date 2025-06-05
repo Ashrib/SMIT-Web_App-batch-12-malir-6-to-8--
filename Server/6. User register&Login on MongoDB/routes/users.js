@@ -4,7 +4,7 @@ import User from '../models/user.js';
 let route = express.Router();
 
 let authenticate = (req, res, next) => {
-   console.log(req.headers.authorization);
+   console.log(req.headers.authorization.split(' ')[1]);
    if (!req.headers.authorization) {
         return res.status(401).json({
             error: true,

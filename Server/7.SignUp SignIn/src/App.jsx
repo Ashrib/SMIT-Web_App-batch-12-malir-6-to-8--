@@ -5,8 +5,12 @@ import { Routes, Route } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { ThemeContext } from "./context/ThemeContext.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import { AuthContext } from "./context/AuthContext.jsx";
 function App() {
   const { theme } = useContext(ThemeContext);
+  const { user } = useContext(AuthContext); // Assuming user is provided by AuthContext
+  console.log("User in App:", user);
   return (
     <>
       <div
@@ -17,10 +21,20 @@ function App() {
         }
       >
         <Navbar />
+          {user ? (
         <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+            path="*"
+            element={<Dashboard />
+            }
+          ></Route>
+        </Routes>
+          ) : (
+              <Routes>
+            <Route path="/" element={<SignUp />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route
             path="*"
             element={
               <div className="flex justify-center items-center h-[93vh]">
@@ -29,6 +43,8 @@ function App() {
             }
           ></Route>
         </Routes>
+          )}
+          
       </div>
     </>
   );
