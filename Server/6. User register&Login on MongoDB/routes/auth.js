@@ -19,6 +19,7 @@ const registerSchema = Joi.object({
     password: Joi.string().min(6)
         .required(),
     age: Joi.number().strict().integer().min(1).required(),
+    marks: Joi.array().items(Joi.number().min(0).max(100)).required()
 })
 const loginSchema = Joi.object({
     email: Joi.string()
@@ -31,7 +32,7 @@ const loginSchema = Joi.object({
 
 route.post('/register', async (req, res) => {
     try {
-        const { username, email, age, password } = req.body;
+        const { username, email, age, password, marks } = req.body;
 
         const { error, value } = registerSchema.validate(req.body);
 
@@ -61,6 +62,7 @@ route.post('/register', async (req, res) => {
             username,
             email,
             age,
+            marks,
             password: hashPassword, // store hashed password
         });
         newUser = await newUser.save();
