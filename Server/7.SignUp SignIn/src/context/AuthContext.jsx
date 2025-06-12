@@ -1,36 +1,40 @@
-import React, { createContext, useState } from "react";
-import { useEffect } from "react";
-export const AuthContext = createContext();
-import Cookies from "js-cookie";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
-    (async()=>{
+    const fetchUser = async () => {
       try {
-        if(!user){
-      const token = Cookies.get('token');
-      console.log("Token from cookies:", token);
-      if(token){
-        // Fetch user data with the token
-          let response = await axios.get('http://localhost:4000/auth/user', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-        setUser(response.data);
+        const token = Cookies.get("token");
+        if (token) {
+          const response = await axios.get("http://localhost:4000/auth/user", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data.data); 
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        Cookies.remove("token"); 
       }
-    }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        
-      }
-    })()
+    };
+
+    fetchUser();
   }, []);
 
+  const logout = () => {
+    Cookies.remove("token");
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
