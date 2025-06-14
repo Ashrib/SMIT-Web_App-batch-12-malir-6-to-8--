@@ -2,6 +2,8 @@ import express from 'express';
 import User from '../models/user.js';
 import Order from '../models/order.js'; // Assuming you have an Order model
 let route = express.Router();
+import jwt from 'jsonwebtoken';
+import 'dotenv/config'
 
 let authenticate = (req, res, next) => {
     console.log(req.headers.authorization.split(' ')[1]);
@@ -14,6 +16,41 @@ let authenticate = (req, res, next) => {
     console.log('User authenticated');
     next();
 };
+
+let authenticateAdmin = (req, res, next) => {
+    try {
+        let token = req.headers.authorization.split(' ')[1]
+    if (!req.headers.authorization) {
+        return res.status(401).json({
+            error: true,
+            message: 'Unauthorized access, please login first!'
+        });
+    }
+    
+    let decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("decoded: "+decodedUser)
+    if (!decodedUser) {
+        return res.status(401).json({
+            error: true,
+            message: 'Invalid token!'
+        });
+    }
+
+    if (!decodedUser.isAdmin) {
+        return res.status(403).json({
+            error: true,
+            message: 'Forbidden access, admin only!'
+        });
+    }
+    } catch (error) {
+        console.error('Error in admin authentication:', error);
+        return res.status(500).json({
+            error: true,
+            message: 'Internal server error!'
+        });
+    }
+    next();
+}
 
 route.get('/', authenticate, async (req, res) => {
     try {
@@ -99,10 +136,9 @@ const usersGroup = await User.aggregate([ // to group data
 
 })
 
-route.delete('/', authenticate, (req, res) => {
-    res.send('users api working!');
+route.delete('/:id', authenticateAdmin, (req, res) => {
+    res.send('users delete api working!');
 });
-
 
 
 
