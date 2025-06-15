@@ -1,6 +1,6 @@
 import express from 'express';
 import User from '../models/user.js';
-import Order from '../models/order.js'; // Assuming you have an Order model
+import Order from '../models/order.js';
 let route = express.Router();
 import jwt from 'jsonwebtoken';
 import 'dotenv/config'
@@ -13,35 +13,54 @@ let authenticate = (req, res, next) => {
             message: 'Unauthorized access, please login first!'
         });
     }
-    console.log('User authenticated');
-    next();
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+        if (!decodedUser) {
+            return res.status(401).json({
+                error: true,
+                message: 'Invalid token!'
+            });
+        }
+        req.user = decodedUser;
+        console.log('User authenticated');
+        next();
+    } catch (error) {
+        console.error('Error in authentication:', error);
+        return res.status(401).json({
+            error: true,
+            message: 'Invalid token!',
+        });
+    }
 };
 
 let authenticateAdmin = (req, res, next) => {
     try {
-        let token = req.headers.authorization.split(' ')[1]
-    if (!req.headers.authorization) {
-        return res.status(401).json({
-            error: true,
-            message: 'Unauthorized access, please login first!'
-        });
-    }
+        let token = req.headers.authorization.split(' ')[1];
+        if (!req.headers.authorization) {
+            return res.status(401).json({
+                error: true,
+                message: 'Unauthorized access, please login first!'
+            });
+        }
     
-    let decodedUser = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("decoded: "+decodedUser)
-    if (!decodedUser) {
-        return res.status(401).json({
-            error: true,
-            message: 'Invalid token!'
-        });
-    }
+        let decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("decoded: "+decodedUser);
+        if (!decodedUser) {
+            return res.status(401).json({
+                error: true,
+                message: 'Invalid token!'
+            });
+        }
 
-    if (!decodedUser.isAdmin) {
-        return res.status(403).json({
-            error: true,
-            message: 'Forbidden access, admin only!'
-        });
-    }
+        if (!decodedUser.isAdmin) {
+            return res.status(403).json({
+                error: true,
+                message: 'Forbidden access, admin only!'
+            });
+        }
+        req.user = decodedUser; 
+        next();
     } catch (error) {
         console.error('Error in admin authentication:', error);
         return res.status(500).json({
@@ -49,12 +68,11 @@ let authenticateAdmin = (req, res, next) => {
             message: 'Internal server error!'
         });
     }
-    next();
 }
 
 route.get('/', authenticate, async (req, res) => {
     try {
-        const { age, username } = req.query; // Destructure query parameters if needed
+        const { age, username } = req.query;
         let query = {};
         if (age) query.age = age;
         if (username) query.username = username;
@@ -64,11 +82,11 @@ route.get('/', authenticate, async (req, res) => {
         //     age: 22
         // }).select('username email _id');
 
-
         // aggregation example
         const users = await User.aggregate([
             {
-                $match: { //query condition
+                $match: {
+                    ...query,
                     age: {
                         $gte: 18, 
                         $lte: 30
@@ -76,23 +94,23 @@ route.get('/', authenticate, async (req, res) => {
                 }
             },
             {
-                $sort:{
-                    age:-1 // sort by age in descending order
+                $sort: {
+                    age: -1
                 }
             },
             {
-                $addFields: { // add field 
+                $addFields: {
                     total: {
                         $sum: '$marks'
                     },
                 }
             },
             {
-                $lookup:{
-                    from:'smit_orders', // collection name in mongodb
-                    localField: '_id', // field from the current collection
-                    foreignField: 'uid', // field from the foreign collection
-                    as: 'orders' // name of the new field to add
+                $lookup: {
+                    from: 'smit_orders',
+                    localField: '_id',
+                    foreignField: 'uid',
+                    as: 'orders'
                 }
             }
             // {
@@ -104,49 +122,46 @@ route.get('/', authenticate, async (req, res) => {
             // },
         ]);
 
-const usersGroup = await User.aggregate([ // to group data
+        const usersGroup = await User.aggregate([
             {
-                $match: { //query condition
+                $match: {
                     age: {
                         $gte: 18, 
                         $lte: 30
                     }
                 }
             },
-            
             {
-                $group:{ 
+                $group: {
                     _id: '$age',
-                    totalUsers:{ $sum: 1 }, // count of users in each age group
+                    totalUsers: { $sum: 1 },
                 }
             },
-            
         ]);
 
         res.status(200).json({
             error: false,
-            message: ' users data fetched!',
+            message: 'Users data fetched!',
             data: users
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+        console.error('Error fetching users:', error);
+        res.status(500).json({
+            error: true,
+            message: 'Internal server error!',
+        });
     }
-
-})
+});
 
 route.delete('/:id', authenticateAdmin, (req, res) => {
     res.send('users delete api working!');
 });
 
-
-
 // route.post('/order', async(req,res)=>{
 //     try {
 //         let newOrder = new Order(req.body);
 //         await newOrder.save()
-    
 //         res.status(201).json({
 //             error: false,
 //             message: 'Order created successfully!',
@@ -160,8 +175,6 @@ route.delete('/:id', authenticateAdmin, (req, res) => {
 //             details: error.message
 //         });
 //     }
-
 // })
-
 
 export default route;

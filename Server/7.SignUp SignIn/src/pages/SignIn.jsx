@@ -1,19 +1,20 @@
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import {AuthContext} from "../context/AuthContext.jsx";
-import { useContext } from "react";
-import { useNavigate } from "react-router";
-import { useState } from "react";
-import Cookies from "js-cookie";
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext.jsx';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
-export default function SignIn() { 
+export default function SignIn() {
   let navigate = useNavigate();
   let [loading, setLoading] = useState(false);
-  let { user, setUser } = useContext(AuthContext);
+  let { setUser } = useContext(AuthContext);
+
   const schema = yup.object({
-    /// yup schema
     email: yup
       .string()
       .email("Invalid email format")
@@ -27,41 +28,46 @@ export default function SignIn() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema), // provide schema
+    resolver: yupResolver(schema),
   });
 
-  const submitButton = async(data) => {
-    console.log('form data:', data);
+  const submitButton = async (data) => {
     try {
       setLoading(true);
-      let loginUser = await axios.post('http://localhost:4000/auth/login', data).then((response) => {
-        console.log("Login successful:", response?.data?.data);
-        setUser(response?.data?.data)
-        Cookies.set('token', response?.data?.token)
-        navigate("/dashboard");
-        setLoading(false);
-      });
-    } catch (error) {
-      console.error("Error during sign in:", error);
-      // Handle error (e.g., show a notification)
-      setLoading(false);
-    } 
+      const response = await axios.post('http://localhost:4000/auth/login', data);
+      const { data: userData, token } = response.data;
 
+      toast.success(`Welcome ${userData.isAdmin ? 'Admin' : 'User'} ${userData.username}!`, {
+        position: "top-right",
+        autoClose: 3000,
+        onClose: () => {
+          setUser(userData);
+          Cookies.set('token', token); 
+          navigate("/dashboard"); 
+        },
+        toastId: "login-success",
+      });
+
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Login failed!', {
+        position: "top-right",
+        autoClose: 3000,
+        toastId: "login-error",
+      });
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="mt-6 flex flex-col justify-center items-center-safe ">
-      <div
-        className="p-7 border-2 w-[90%] sm:w-[70%] lg:w-[50%] xl:w-[30%]
- rounded-2xl"
-      >
+    <div className="mt-6 flex flex-col justify-center items-center">
+      <div className="p-7 border-2 w-[90%] sm:w-[70%] lg:w-[50%] xl:w-[30%] rounded-2xl">
         <h1 className="text-center text-4xl">Sign In</h1>
         <form
           onSubmit={handleSubmit(submitButton)}
-          className="max-w-md mx-auto mt-3 flex justify-center flex-col"
+          className="max-w-md mx-auto mt-3 flex flex-col"
         >
           <div className="relative z-0 w-full mb-5 group">
             <input
@@ -69,15 +75,15 @@ export default function SignIn() {
               type="email"
               name="email"
               id="email"
-              className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
             <label
               htmlFor="email"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Email address
             </label>
-            {errors.email && <span>{errors.email.message}</span>}
+            {errors.email && <span className="text-red-500">{errors.email.message}</span>}
           </div>
           <div className="relative z-0 w-full mb-5 group">
             <input
@@ -85,26 +91,30 @@ export default function SignIn() {
               type="password"
               name="password"
               id="password"
-              className="block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
-              required=""
             />
             <label
               htmlFor="password"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Password
             </label>
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.password && <span className="text-red-500">{errors.password.message}</span>}
           </div>
-
-          <button disabled={loading}
+          <button
+            disabled={loading}
             type="submit"
-            className={`text-white ${loading ? "bg-red-800" : "bg-blue-700 hover:bg-blue-800"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}
+            className={`text-white ${loading ? "bg-red-800" : "bg-blue-700 hover:bg-blue-800"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}
           >
             {loading ? "Loading..." : "Submit"}
           </button>
         </form>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          toastStyle={{ zIndex: 9999 }}
+        />
       </div>
     </div>
   );

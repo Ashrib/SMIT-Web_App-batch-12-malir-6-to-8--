@@ -5,13 +5,12 @@ let userSchema = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     age: {type: Number, required: true},
     password: {type: String, required: true},
-    marks : [Number],
+    marks: [Number],
     isAdmin: {type: Boolean, default: false},
-},
-{timestamps: true}
-)
+    total: {type: Number, default: 0}, 
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'smit_orders' }], 
+}, { timestamps: true });
 
 let User = mongoose.model('Smit_Users', userSchema);
 
 export default User;
-
