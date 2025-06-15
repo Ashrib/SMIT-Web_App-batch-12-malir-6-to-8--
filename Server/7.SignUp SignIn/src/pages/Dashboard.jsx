@@ -45,6 +45,9 @@ export default function Dashboard() {
         console.error("Error fetching users:", err);
         setError(err.response?.data?.message || "Failed to fetch users");
         setLoading(false);
+        if (err.response?.status === 401) {
+          navigate("/signin"); 
+        }
       }
     };
 
@@ -75,7 +78,7 @@ export default function Dashboard() {
         align="center"
         sx={{ color: "#555", mb: 4 }}
       >
-        {user ? `Welcome, ${user.username}!` : "Loading user..."}
+        {user ? `Welcome, ${user.username}${user.isAdmin ? ' (Admin)' : ''}!` : "Loading user..."}
       </Typography>
 
       {loading && (
@@ -97,13 +100,14 @@ export default function Dashboard() {
       )}
 
       <Grid container spacing={4} justifyContent="center">
-        {users.map((user) => (
-          <Grid key={user._id}>
+        {users.map((cardUser) => (
+          <Grid key={cardUser._id} item>
             <Card
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 height: "100%",
+                width: "250px",
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                 borderRadius: "12px",
                 bgcolor: "#fff",
@@ -129,48 +133,50 @@ export default function Dashboard() {
                   component="div"
                   sx={{ fontWeight: "medium", color: "#333", mb: 1 }}
                 >
-                  {user.username}
+                  {cardUser.username}{cardUser.isAdmin ? ' (Admin)' : ''}
                 </Typography>
                 <Typography
                   variant="body2"
                   sx={{ color: "#666", mb: 2, fontStyle: "italic" }}
                 >
-                  {user.email}
+                  {cardUser.email}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>
-                  Age: {user.age}
+                  Age: {cardUser.age}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>
-                  Marks: {user.marks.join(", ") || "No marks available"}
+                  Marks: {cardUser.marks.join(", ") || "No marks available"}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>
-                  Total Marks: {user.total || "N/A"}
+                  Total Marks: {cardUser.total || "N/A"}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>
-                  Orders: {user.orders.length}
+                  Orders: {cardUser.orders?.length || 0}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#666" }}>
-                  Joined: {new Date(user.createdAt).toLocaleDateString()}
+                  Joined: {new Date(cardUser.createdAt).toLocaleDateString()}
                 </Typography>
               </CardContent>
-              <CardActions sx={{ justifyContent: "center", p: 2, bgcolor: "#fafafa" }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  sx={{ mr: 1, px: 3, borderRadius: "8px" }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  size="small"
-                  sx={{ px: 3, borderRadius: "8px" }}
-                >
-                  Delete
-                </Button>
-              </CardActions>
+              {(user?.isAdmin || user?.email === cardUser.email) && (
+                <CardActions sx={{ justifyContent: "center", p: 2, bgcolor: "#fafafa" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    sx={{ mr: 1, px: 3, borderRadius: "8px" }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    size="small"
+                    sx={{ px: 3, borderRadius: "8px" }}
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              )}
             </Card>
           </Grid>
         ))}
