@@ -22,6 +22,7 @@ const AuthContextProvider = ({ children }) => {
       } catch (err) {
         console.error("Error fetching user data:", err);
         Cookies.remove("token"); 
+        setUser(null); 
       }
     };
 
