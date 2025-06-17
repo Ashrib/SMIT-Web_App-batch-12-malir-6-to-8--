@@ -5,9 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { useState } from "react";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [isloading, setIsloading] = useState(false)
+  
 
   const schema = yup.object({
     email: yup
@@ -47,6 +50,7 @@ export default function SignUp() {
 
   const onSubmit = async (data) => {
     try {
+      setIsloading(true)
       const response = await axios.post('http://localhost:4000/auth/register', {
         username: `${data.first_name} ${data.last_name}`,
         email: data.email,
@@ -55,20 +59,22 @@ export default function SignUp() {
         marks: [], // default value
         isAdmin: data.isAdmin,
       });
-
+      
       const result = response.data;
       console.log(result);
+      setIsloading(false)
 
+      
       toast.success('Registration successful! Redirecting to login...', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      onClose: () => navigate('/signIn'),
-    });
-
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        onClose: () => navigate('/signIn'),
+      });
+      
   } catch (error) {
     console.log(error);
     toast.error(error?.response?.data?.message || 'Error during registration!', {
@@ -79,6 +85,7 @@ export default function SignUp() {
       pauseOnHover: true,
       draggable: true,
     });
+    setIsloading(false)
   }
 };
 
@@ -200,10 +207,10 @@ export default function SignUp() {
             </div>
             {errors.isAdmin && <span className="text-red-500">{errors.isAdmin.message}</span>}
           </div>
-          <input
+          <input disabled={isloading}
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            value="Sign Up"
+            value={`${isloading? 'loading': 'Sign Up'}`}
           />
         </form>
         <ToastContainer />

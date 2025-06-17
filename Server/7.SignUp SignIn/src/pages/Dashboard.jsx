@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Box,
   Grid,
@@ -21,6 +23,45 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  let deleteUser = async (uid) => {
+    try {
+      console.log(uid)
+      const token = Cookies.get("token");
+      let deleteData = await axios.delete(`http://localhost:4000/users/${uid}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(() => {
+        setUsers([...users.filter(user => user._id != uid)]);
+
+        toast.success('User Delete successful!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      })
+
+
+
+    } catch (error) {
+      console.error(error)
+      toast.error('Error in deleteing User!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
+
+
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -46,7 +87,7 @@ export default function Dashboard() {
         setError(err.response?.data?.message || "Failed to fetch users");
         setLoading(false);
         if (err.response?.status === 401) {
-          navigate("/signin"); 
+          navigate("/signin");
         }
       }
     };
@@ -157,7 +198,7 @@ export default function Dashboard() {
                   Joined: {new Date(cardUser.createdAt).toLocaleDateString()}
                 </Typography>
               </CardContent>
-              {(user?.isAdmin || user?.email === cardUser.email) && (
+              {(user?.isAdmin) && (
                 <CardActions sx={{ justifyContent: "center", p: 2, bgcolor: "#fafafa" }}>
                   <Button
                     variant="contained"
@@ -172,6 +213,7 @@ export default function Dashboard() {
                     color="error"
                     size="small"
                     sx={{ px: 3, borderRadius: "8px" }}
+                    onClick={() => deleteUser(cardUser._id)}
                   >
                     Delete
                   </Button>
@@ -181,6 +223,12 @@ export default function Dashboard() {
           </Grid>
         ))}
       </Grid>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        toastStyle={{ zIndex: 9999 }}
+      />
     </Box>
+
   );
 }
