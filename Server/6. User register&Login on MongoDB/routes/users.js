@@ -83,61 +83,64 @@ route.get('/', authenticate, async (req, res) => {
         // }).select('username email _id');
 
         // aggregation example
-        const users = await User.aggregate([
-            {
-                $match: {
-                    ...query,
-                    age: {
-                        $gte: 18, 
-                        $lte: 30
-                    }
-                }
-            },
-            {
-                $sort: {
-                    age: -1
-                }
-            },
-            {
-                $addFields: {
-                    total: {
-                        $sum: '$marks'
-                    },
-                }
-            },
-            {
-                $lookup: {
-                    from: 'smit_orders',
-                    localField: '_id',
-                    foreignField: 'uid',
-                    as: 'orders'
-                }
-            }
-            // {
-            //     $project:{
-            //         username: 1,
-            //         age:1,
-            //         email:1,
-            //     }
-            // },
-        ]);
 
-        const usersGroup = await User.aggregate([
-            {
-                $match: {
-                    age: {
-                        $gte: 18, 
-                        $lte: 30
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: '$age',
-                    totalUsers: { $sum: 1 },
-                }
-            },
-        ]);
+        const users = await User.find();
+
+        // const users = await User.aggregate([
+        //     {
+        //         $match: {
+        //             ...query,
+        //             age: {
+        //                 $gte: 18, 
+        //                 $lte: 30
+        //             }
+        //         }
+        //     },
+        //     {
+        //         $sort: {
+        //             age: -1
+        //         }
+        //     },
+        //     {
+        //         $addFields: {
+        //             total: {
+        //                 $sum: '$marks'
+        //             },
+        //         }
+        //     },
+        //     {
+        //         $lookup: {
+        //             from: 'smit_orders',
+        //             localField: '_id',
+        //             foreignField: 'uid',
+        //             as: 'orders'
+        //         }
+        //     }
+        //     {
+        //         $project:{
+        //             username: 1,
+        //             age:1,
+        //             email:1,
+        //         }
+        //     },
+        // ]);
+
+        // const usersGroup = await User.aggregate([
+        //     {
+        //         $match: {
+        //             age: {
+        //                 $gte: 18, 
+        //                 $lte: 30
+        //             }
+        //         }
+        //     },
+        //     {
+        //         $group: {
+        //             _id: '$age',
+        //             totalUsers: { $sum: 1 },
+        //         }
+        //     },
+        // ]);
 
         res.status(200).json({
             error: false,
@@ -154,8 +157,22 @@ route.get('/', authenticate, async (req, res) => {
     }
 });
 
-route.delete('/:id', authenticateAdmin, (req, res) => {
-    res.send('users delete api working!');
+route.delete('/:id', authenticateAdmin, async(req, res) => {
+    try {
+        let { id } = req.params;
+        let deleteUser = await User.findByIdAndDelete(id);
+        res.status(200).json({
+            error: false,
+            message: 'user successfully deleted!',
+        })
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(201).json({
+            error: true,
+            message: error,
+            data: null,
+        })
+    }
 });
 
 // route.post('/order', async(req,res)=>{

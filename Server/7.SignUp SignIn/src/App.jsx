@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import { ThemeContext } from "./context/ThemeContext.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import { AuthContext } from "./context/AuthContext.jsx";
+import Chat from "./pages/Chat.jsx";
 function App() {
   const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext); // Assuming user is provided by AuthContext
@@ -24,6 +25,7 @@ function App() {
           {user ? (
         <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chat" element={<Chat />} />
             <Route
             path="*"
             element={<Dashboard />

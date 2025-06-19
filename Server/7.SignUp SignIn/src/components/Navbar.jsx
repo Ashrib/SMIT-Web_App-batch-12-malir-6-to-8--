@@ -25,6 +25,19 @@ export default function Navbar() {
       <div className="flex items-center">
         {user ? (
           <>
+
+          <Link
+              to="/dashboard"
+              className="text-sm px-4 py-2 leading-none rounded-full hover:bg-gray-700"
+            >
+              dashboard
+            </Link>
+            <Link
+              to="/chat"
+              className="text-sm px-4 py-2 leading-none rounded-full hover:bg-gray-700"
+            >
+              Chat
+            </Link>
             <button
               onClick={handleLogout}
               className="text-sm px-4 py-2 leading-none rounded-full hover:bg-gray-700"

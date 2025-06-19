@@ -6,11 +6,12 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [users, setUsers] = useState(null);
+  
+  const token = Cookies.get("token");
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = Cookies.get("token");
         if (token) {
           const response = await axios.get("http://localhost:4000/auth/user", {
             headers: {
@@ -28,6 +29,22 @@ const AuthContextProvider = ({ children }) => {
 
     fetchUser();
   }, []);
+  
+  useEffect(()=>{
+    (async()=>{
+      try {
+      let getUsers = await axios.get('http://localhost:4000/users', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+      console.log("users:", getUsers.data.data)
+      setUsers(getUsers.data.data)
+    } catch (error) {
+      console.error(error)
+    }
+    })()
+  },[])
 
   const logout = () => {
     Cookies.remove("token");
@@ -35,7 +52,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, logout,users,setUsers }}>
       {children}
     </AuthContext.Provider>
   );
