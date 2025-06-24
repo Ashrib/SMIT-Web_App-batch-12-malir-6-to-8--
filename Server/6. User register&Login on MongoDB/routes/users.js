@@ -161,6 +161,9 @@ route.delete('/:id', authenticateAdmin, async(req, res) => {
     try {
         let { id } = req.params;
         let deleteUser = await User.findByIdAndDelete(id);
+
+        req.app.get('io').emit('usersUpdated');
+
         res.status(200).json({
             error: false,
             message: 'user successfully deleted!',
@@ -175,7 +178,7 @@ route.delete('/:id', authenticateAdmin, async(req, res) => {
     }
 });
 
-// route.post('/order', async(req,res)=>{
+// route.post('/user', async(req,res)=>{
 //     try {
 //         let newOrder = new Order(req.body);
 //         await newOrder.save()

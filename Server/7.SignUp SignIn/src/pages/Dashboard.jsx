@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import Cookies from "js-cookie";
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,8 +16,11 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import socket from 'socket.io-client';
+import { use } from "react";
 
 export default function Dashboard() {
+  const socketRef = useRef(null);
   const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,11 +63,7 @@ export default function Dashboard() {
     }
   }
 
-
-
-
-  useEffect(() => {
-    const fetchUsers = async () => {
+ const fetchUsers = async () => {
       try {
         setLoading(true);
         const token = Cookies.get("token");
@@ -92,6 +91,27 @@ export default function Dashboard() {
       }
     };
 
+
+// 
+
+useEffect(()=>{
+  socketRef.current = socket('http://localhost:4000');
+  socketRef.current.on('usersUpdated', () => {
+    fetchUsers();
+  });
+
+  return ()=>{ // Cleanup socket connection on unmount
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+      console.log('Socket disconnected');
+    }
+  }
+},[])
+
+
+
+  useEffect(() => {
+   
     fetchUsers();
   }, [navigate]);
 

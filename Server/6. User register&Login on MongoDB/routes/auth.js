@@ -76,6 +76,7 @@ route.post('/register', async (req, res) => {
             isAdmin,
         });
         newUser = await newUser.save();
+        req.app.get('io').emit('usersUpdated'); // notify all connected clients
         res.status(200).json({
             error: false,
             message: 'User registered successfully!',

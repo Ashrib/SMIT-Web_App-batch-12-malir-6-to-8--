@@ -9,6 +9,7 @@ const AuthContextProvider = ({ children }) => {
   const [users, setUsers] = useState(null);
   
   const token = Cookies.get("token");
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
