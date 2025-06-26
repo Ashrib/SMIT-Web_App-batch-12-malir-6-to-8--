@@ -13,12 +13,19 @@ import {
   Divider,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
+import { useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
+import socket from 'socket.io-client';
+import { useRef } from "react";
 export default function Chat() {
+  const socketRef = useRef(null)
   const { user, users } = useContext(AuthContext);
   const [selectedUser, setSelectedUser] = useState(null);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState({}); // { userId: [msg, ...] }
+  const [messages, setMessages] = useState([]); // { userId: [msg, ...] }
+  const token = Cookies.get("token");
+  console.log(token)
 
   // Handle user click
   const handleUserClick = (u) => {
@@ -28,31 +35,30 @@ export default function Chat() {
 
   // Handle send message
   const handleSendMessage = async () => {
-    if (!message.trim() || !selectedUser) return;
-    const msgObj = {
-      to: selectedUser._id,
-      from: user._id,
-      text: message,
-    };
+    if (!message || !selectedUser) return;
+    console.log("Sending message:", message,selectedUser,user);
+
     try {
-      // Send to backend
-      await fetch("http://localhost:4000/sendMessage", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(msgObj),
-      });
-      // Add to local messages
-      setMessages((prev) => ({
-        ...prev,
-        [selectedUser._id]: [
-          ...(prev[selectedUser._id] || []),
-          { ...msgObj, self: true, createdAt: new Date().toLocaleTimeString() },
-        ],
-      }));
-      setMessage("");
-    } catch (e) {
-      alert("Failed to send message");
+  let response = await axios.post(
+    `http://localhost:4000/messages/${user?._id}`,
+    {
+      from: user?._id,
+      to: selectedUser?._id,
+      text: message,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
+  );
+  console.log("Message sent:", response.data);
+  console.log("Message sent successfully!");
+} catch (error) {
+  console.error("Error sending message:", error);
+}
+
+    
   };
 
   // Handle Enter key
@@ -62,6 +68,54 @@ export default function Chat() {
 
   // Filter out self from users
   const otherUsers = (users || []).filter((u) => u._id !== user?._id);
+
+
+let getMessages = async () => {
+  if (!selectedUser) return;
+  console.log(user)
+  console.log(selectedUser)
+
+  try {
+    const response = await axios.get(
+      `http://localhost:4000/messages/${user?._id}?to=${selectedUser?._id}` // Adjust the endpoint as needed
+    );
+    const data = response.data;
+    
+    setMessages((prev) => ({
+      ...prev,
+      ...data
+    }));
+
+    console.log("Messages fetched:", data);
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+  }
+}
+
+
+useEffect(() => {
+  if (selectedUser) {
+    getMessages();
+    console.log(messages)
+  }
+}, [selectedUser]);
+
+
+
+
+useEffect(()=>{
+socketRef.current = socket('http://localhost:4000');
+  socketRef.current.on('messagesUpdated', () => {
+    getMessages();
+  });
+
+  return ()=>{ // Cleanup socket connection on unmount
+    if (socketRef.current) {
+      socketRef.current.disconnect();
+      console.log('Socket disconnected');
+    }
+  }
+},[])
 
   return (
     <Box
@@ -89,10 +143,9 @@ export default function Chat() {
               No users found
             </Typography>
           )}
-          {otherUsers.map((u) => (
+          {otherUsers?.map((u) => (
             <ListItem
-              button
-              key={u._id}
+              key={u?._id}
               selected={selectedUser?._id === u._id}
               onClick={() => handleUserClick(u)}
               sx={{

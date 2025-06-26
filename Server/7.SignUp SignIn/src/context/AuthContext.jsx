@@ -20,6 +20,7 @@ const AuthContextProvider = ({ children }) => {
             },
           });
           setUser(response.data.data); 
+          console.log("User data fetched:", response.data);
         }
       } catch (err) {
         console.error("Error fetching user data:", err);

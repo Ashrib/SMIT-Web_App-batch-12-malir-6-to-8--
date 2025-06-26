@@ -125,6 +125,7 @@ route.post('/login', async (req, res) => {
                 email: findUser.email,
                 age: findUser.age,
                 isAdmin: findUser.isAdmin,
+                _id: findUser._id,
             },
             process.env.JWT_SECRET
         );
@@ -137,6 +138,7 @@ route.post('/login', async (req, res) => {
                 email: findUser.email,
                 age: findUser.age,
                 isAdmin: findUser.isAdmin,
+                _id: findUser._id,
             },
             token: token,
         });

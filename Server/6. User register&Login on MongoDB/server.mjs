@@ -4,6 +4,7 @@ import 'dotenv/config'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.js';
 import usersRoutes from './routes/users.js';
+import messagesRoutes from './routes/messages.js';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
@@ -23,6 +24,7 @@ app.use(cors());
 app.use(express.json())
 app.use('/auth',authRoutes)
 app.use('/users',usersRoutes)
+app.use('/messages',messagesRoutes)
 
  mongoose.connect(process.env.MONGOBD_URL).then(()=>{
     console.log('mongodb connected!')
