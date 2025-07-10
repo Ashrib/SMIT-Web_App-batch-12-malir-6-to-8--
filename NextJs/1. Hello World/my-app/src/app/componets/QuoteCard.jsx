@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default async function QuoteCard() {
 
 
@@ -19,10 +21,10 @@ export default async function QuoteCard() {
   return (
 <>
     {quotes?.quotes?.map((quote) => (
-    <div className="border p-4 rounded" key={quote.id}>
-      <p className="text-lg italic">"{quote.quote}"</p>
-      <p className="text-right">- {quote.author}</p>
-    </div>
+      <Link href={`/quotes/${quote.id}`} key={quote.id} className="border p-4 rounded block mb-4">
+        <p className="text-lg italic">"{quote.quote}"</p>
+        <p className="text-right">- {quote.author}</p>
+      </Link>
     ))}
 </>
   );

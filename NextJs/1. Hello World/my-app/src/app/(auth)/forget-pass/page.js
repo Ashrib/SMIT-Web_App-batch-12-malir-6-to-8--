@@ -1,7 +1,7 @@
 export default function Login() {
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Forget Pass</h2>
       <form>
         <div>
           <label>Email:</label>

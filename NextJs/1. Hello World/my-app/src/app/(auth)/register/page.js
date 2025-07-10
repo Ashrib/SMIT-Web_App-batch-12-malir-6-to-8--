@@ -1,7 +1,7 @@
-export default function Login() {
+export default function Register() {
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form>
         <div>
           <label>Email:</label>
@@ -11,7 +11,7 @@ export default function Login() {
           <label>Password:</label>
           <input type="password" name="password" required />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

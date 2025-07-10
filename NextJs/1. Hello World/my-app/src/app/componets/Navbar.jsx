@@ -23,6 +23,9 @@ export default function Navbar() {
         <Link href="/quotes" className={`hover:underline ${pathname === '/quotes' ? 'font-bold underline' : ''}`}>
         <li>Quotes</li>
         </Link>
+        <Link href="/login" className={`hover:underline ${pathname === '/login' ? 'font-bold underline' : ''}`}>
+        <li>Auth</li>
+        </Link>
       </ul>
     </nav>
   );
