@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function outer(){
+            let count = 0;
+            return function inner(){
+                count++;
+                console.log(count)
+            }
+        }
+
+        let countValue = outer();
+        countValue();
+        countValue();
+
+        var a ;
+        var b = null;
+
+        let fetchApi = (api)=>{
+            return fetch(api).then(res => res.json())
+        }
+         let api1 = 'https://api1'
+         let api2 = 'https://api2'
+         let api3 = 'https://api3'
+         let api4 = 'https://api4'
+         let api5 = 'https://api5'
+
+        // Promise.all([fetchApi(api1),fetchApi(api2),fetchApi(api3)])
+        // .then((values)=>{
+        //     console.log('res1: ', values[0])
+        // })
+         console.log('all data get')
+
+        
+        // function currying
+        function test(a){
+            return function(b){
+                return function(c){
+                    return a+b+c
+                }
+            }
+        }
+        console.log(test(5)(5)(10))
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
